@@ -1,88 +1,105 @@
 import 'package:adawat_customer_app/helpers/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ThemeHelpers {
 
-  static final textTheme = Theme.of(Get.context!).textTheme;
-
-  static ThemeData lightTheme = ThemeData.light(
+  static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
   ).copyWith(
     splashFactory: NoSplash.splashFactory,
     brightness: Brightness.light,
-    scaffoldBackgroundColor: primaryWhite,
+    scaffoldBackgroundColor: backgroundWhite,
     textTheme: TextThemes.textTheme(color: primaryBlack),
-    colorScheme: ColorScheme.fromSeed(seedColor: primaryWhite),
+    colorScheme: ColorScheme.fromSeed(seedColor: backgroundWhite),
+      iconButtonTheme: IconButtonThemeData(style: IconButton.styleFrom(foregroundColor: primaryBlack, iconSize: 20)),
     iconTheme: const IconThemeData(color: primaryBlack, size: 20,),
       appBarTheme: const AppBarTheme(
         centerTitle: true,
-        backgroundColor: primaryWhite,
+        backgroundColor: backgroundWhite,
+          scrolledUnderElevation: 0.0,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.dark,
+          systemNavigationBarColor: Colors.transparent,
+          systemNavigationBarIconBrightness: Brightness.dark
+        )
         // titleTextStyle:
       ),
       inputDecorationTheme: InputDecorationTheme(
-        // errorStyle: ,
-          prefixIconColor: darkThemeLightGrey,
+        suffixIconColor: primaryBlack,
+        contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+          prefixIconColor: primaryBlack,
           filled: true,
           fillColor: Colors.transparent,
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
-              borderSide: const BorderSide(color: primaryBlack, width: 1.2)
+              borderRadius: BorderRadius.circular(kBorderRadius),
+              borderSide: const BorderSide(color: lightThemeBorderGrey, width: 1.2)
           ),
           focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
-              borderSide: const BorderSide(color: primaryBlack, width: 2)
+              borderRadius: BorderRadius.circular(kBorderRadius),
+              borderSide: const BorderSide(color: lightThemeBorderGrey, width: 2)
           ),
           errorBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: errorRed, width: 1.2),
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(kBorderRadius),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: errorRed, width: 2),
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(kBorderRadius),
           )
       ),
     progressIndicatorTheme: const ProgressIndicatorThemeData(
-      color: primaryDullYellow,
+      color: primaryYellow,
     )
   );
 
-  static ThemeData darkTheme = ThemeData.dark(
+  static ThemeData darkTheme = ThemeData(
     useMaterial3: true
   ).copyWith(
       textTheme: TextThemes.textTheme(color: darkThemeLightGrey),
     splashFactory: NoSplash.splashFactory,
     brightness: Brightness.dark,
     scaffoldBackgroundColor: primaryBlack,
+    iconButtonTheme: IconButtonThemeData(style: IconButton.styleFrom(foregroundColor: darkThemeLightGrey, iconSize: 20)),
     colorScheme: ColorScheme.fromSeed(seedColor: darkThemeLightGrey),
     iconTheme: const IconThemeData(color: darkThemeLightGrey, size: 20,),
     appBarTheme: const AppBarTheme(
       centerTitle: true,
       backgroundColor: primaryBlack,
+      scrolledUnderElevation: 0.0,
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarBrightness: Brightness.dark,
+            statusBarIconBrightness: Brightness.light,
+            systemNavigationBarColor: Colors.transparent,
+            systemNavigationBarIconBrightness: Brightness.light
+        )
       // titleTextStyle:
     ),
     inputDecorationTheme: InputDecorationTheme(
-      // errorStyle: ,
+      suffixIconColor: darkThemeLightGrey,
+        contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
       prefixIconColor: darkThemeLightGrey,
       filled: true,
       fillColor: Colors.transparent,
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(kBorderRadius),
         borderSide: const BorderSide(color: darkThemeLightGrey, width: 1.2)
       ),
       focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(kBorderRadius),
         borderSide: const BorderSide(color: darkThemeLightGrey, width: 2)
       ),
       errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: errorRed, width: 1.2),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(kBorderRadius),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderSide: const BorderSide(color: errorRed, width: 2),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(kBorderRadius),
       )
     ),
       progressIndicatorTheme: const ProgressIndicatorThemeData(
@@ -140,6 +157,6 @@ class TextThemes {
         fontWeight: FontWeight.w400
     ),
   ).apply(
-    fontFamily: GoogleFonts.inter().fontFamily
+    fontFamily: GoogleFonts.ubuntu().fontFamily
   );
 }

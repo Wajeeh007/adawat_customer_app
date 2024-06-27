@@ -9,6 +9,7 @@ environment:
   sdk: '>=3.3.3 <4.0.0'
 
 dependencies:
+
   flutter:
     sdk: flutter
 
@@ -18,12 +19,18 @@ dependencies:
   get_storage: ^2.1.1
   google_fonts: ^6.2.1
   flutter_native_splash: ^2.4.0
+  flutter_svg_provider: ^1.0.7
+  dotted_line: ^3.2.2
+  google_maps_flutter: ^2.7.0
+#  geolocator: ^12.0.0
+  permission_handler: ^11.3.1
+  geolocator: ^12.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
 
 flutter:
   uses-material-design: true
@@ -109,7 +116,7 @@ flutter_native_splash:
   # platform.
   #android: false
   #ios: false
-  #web: false
+#  web: false
 
   # Platform specific images can be specified with the following parameters, which will override
   # the respective parameter.  You may specify all, selected, or none of these parameters:

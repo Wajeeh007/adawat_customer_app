@@ -78,7 +78,7 @@ class BottomAppbarView extends StatelessWidget {
               IconAndText(
                   onTap: () {},
                   icon: CupertinoIcons.calendar,
-                  text: lang_key.bookings.tr,
+                  text: lang_key.booking.tr,
                   index: 1
               ),
               IconAndText(
@@ -138,7 +138,7 @@ class IconAndText extends StatelessWidget {
                 children: [
                   Icon(
                     icon,
-                    size: 23,
+                    size: 25,
                     color: index == GlobalVariables.selectedIndex.value ? Colors.white : darkThemeLightGrey,),
                   notificationDot == true ? CircleAvatar(
                     radius: 5,
@@ -158,7 +158,7 @@ class IconAndText extends StatelessWidget {
               Text(
                 text,
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  fontSize: 10,
+                  fontSize: Get.width * 0.029,
                   color: index == GlobalVariables.selectedIndex.value ? Colors.white : darkThemeLightGrey,
                 ),
               )

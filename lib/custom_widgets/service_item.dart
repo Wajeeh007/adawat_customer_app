@@ -2,6 +2,7 @@ import 'package:adawat_customer_app/models/service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:adawat_customer_app/helpers/languages/translations_key.dart' as lang_key;
+import 'package:shimmer/shimmer.dart';
 import '../helpers/constants.dart';
 import 'custom_button.dart';
 
@@ -24,7 +25,7 @@ class ServiceItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(kBorderRadius),
         boxShadow: Get.isDarkMode ? null : [
           BoxShadow(
-              color: darkThemeLightGrey.withOpacity(0.3),
+              color: darkThemeLightGrey.withOpacity(0.6),
               spreadRadius: 0.05,
               blurRadius: 10,
               blurStyle: BlurStyle.outer,
@@ -48,10 +49,14 @@ class ServiceItem extends StatelessWidget {
                   children: [
                     Text(
                       service.serviceName!,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     Text(
                       service.serviceCategory!,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: Get.isDarkMode ? darkThemeLightGrey.withOpacity(0.5) : darkThemeLightGrey
                       ),
@@ -60,21 +65,25 @@ class ServiceItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "${service.price.toString()} ${lang_key.sar.tr}",
-                              style: Theme.of(context).textTheme.labelMedium,
-                            ),
-                            Text(
-                              "(${service.measuringUnit})",
-                              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                  fontWeight: FontWeight.w400,
-                                  color: Get.isDarkMode ? darkThemeLightGrey.withOpacity(0.5) : darkThemeLightGrey
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${service.price.toString()} ${lang_key.sar.tr}",
+                                style: Theme.of(context).textTheme.labelMedium,
                               ),
-                            )
-                          ],
+                              Text(
+                                "(${service.measuringUnit})",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                    fontWeight: FontWeight.w400,
+                                    color: Get.isDarkMode ? darkThemeLightGrey.withOpacity(0.6) : darkThemeLightGrey
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                         CustomButton(
                           onPressed: () {},
@@ -86,9 +95,114 @@ class ServiceItem extends StatelessWidget {
                             color: primaryBlack
                           ),
                           borderRadius: 10,
-                          color: Colors.grey.shade300,
+                          color: Get.isDarkMode ? primaryDullYellow : primaryYellow,
                           height: 30,
                         )
+                      ],
+                    )
+                  ],
+                ),
+              )
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class ShimmerServiceItem extends StatelessWidget {
+  const ShimmerServiceItem({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      height: 105,
+      decoration: BoxDecoration(
+        color: Get.isDarkMode ? Colors.transparent : Colors.white,
+        borderRadius: BorderRadius.circular(kBorderRadius),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+              flex: 2,
+              child: Shimmer.fromColors(
+                baseColor: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
+                highlightColor: Get.isDarkMode ? darkModeShimmerHighGrey : lightModeShimmerHighGrey,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
+                    borderRadius: BorderRadius.circular(kBorderRadius)
+                  ),
+                ),
+              )
+          ),
+          Expanded(
+              flex: 5,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Shimmer.fromColors(
+                          baseColor: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
+                          highlightColor: Get.isDarkMode ? darkModeShimmerHighGrey : lightModeShimmerHighGrey,
+                          child: Container(
+                            height: 15,
+                            width: 150,
+                            decoration: BoxDecoration(
+                              color: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
+                              borderRadius: BorderRadius.circular(kBorderRadius)
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 5,),
+                        Shimmer.fromColors(
+                          baseColor: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
+                          highlightColor: Get.isDarkMode ? darkModeShimmerHighGrey : lightModeShimmerHighGrey,
+                          child: Container(
+                            height: 8,
+                            width: 80,
+                            decoration: BoxDecoration(
+                                color: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
+                                borderRadius: BorderRadius.circular(kBorderRadius)
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Shimmer.fromColors(
+                          baseColor: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
+                          highlightColor: Get.isDarkMode ? darkModeShimmerHighGrey : lightModeShimmerHighGrey,
+                          child: Container(
+                            height: 15,
+                            width: 100,
+                            decoration: BoxDecoration(
+                                color: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
+                                borderRadius: BorderRadius.circular(kBorderRadius)
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 5,),
+                        Shimmer.fromColors(
+                          baseColor: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
+                          highlightColor: Get.isDarkMode ? darkModeShimmerHighGrey : lightModeShimmerHighGrey,
+                          child: Container(
+                            height: 8,
+                            width: 80,
+                            decoration: BoxDecoration(
+                                color: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
+                                borderRadius: BorderRadius.circular(kBorderRadius)
+                            ),
+                          ),
+                        ),
                       ],
                     )
                   ],

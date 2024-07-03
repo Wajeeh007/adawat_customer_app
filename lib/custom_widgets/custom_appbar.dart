@@ -1,8 +1,10 @@
+import 'package:adawat_customer_app/helpers/constants.dart';
+import 'package:adawat_customer_app/helpers/global_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final bool? menuItem;
+  final bool? includeCart;
   final String? title;
   final List<Widget>? action;
   final Widget? leading;
@@ -16,7 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar(
       {super.key,
         this.title,
-        this.menuItem,
+        this.includeCart,
         this.action,
         this.leading,
         this.height = 55,
@@ -36,18 +38,40 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leadingWidth: leadingWidth,
       elevation: elevation ?? 0,
       // centerTitle: true,
-      actions: action,
+      actions: includeCart == true ? [
+        Stack(
+          children: [
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.shopping_cart_outlined)
+            ),
+            GlobalVariables.itemsInCart.value == 0 ? const SizedBox() : Positioned(
+              top: 8,
+              right: 10,
+              child: CircleAvatar(
+                backgroundColor: primaryDullYellow,
+                radius: 7,
+                child: Text(
+                  GlobalVariables.itemsInCart.value.toString(),
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    color: Colors.white,
+                    fontSize: 10
+                  ),
+                ),
+              ),
+            )
+          ],
+        )
+      ] : null,
       title: title != null ? Text(
         title!,
         style: Theme.of(context).textTheme.bodyMedium,
       ) : null,
       leading: backBtn == false ? null : leading ??
-          (menuItem != null
-              ? null
-              : IconButton(
+              IconButton(
                 onPressed: () => Get.back(),
                 icon: const Icon(Icons.arrow_back_ios),
-              )),
+              ),
       bottom: bottom != null ? PreferredSize(preferredSize: preferredSize, child: bottom!) : null
     );
   }

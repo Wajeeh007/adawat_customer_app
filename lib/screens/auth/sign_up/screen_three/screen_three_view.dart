@@ -18,76 +18,85 @@ class ScreenThreeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(backBtn: true,),
-      body: SingleChildScrollView(
-        physics: const ScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-        child: Column(
-          children: [
-            StepperText(index: 2, texts: [
-              lang_key.personalInfo.tr,
-              lang_key.address.tr,
-              lang_key.bank.tr
-            ]),
-            CustomTextField(
-              title: lang_key.cardHolderName.tr,
-              asterisk: true,
-              hintText: 'John Doe',
-              validator: (value) => CommonFunctions.validateDefaultField(value),
-              inputFormatters: [
-                FilteringTextInputFormatter.deny(RegExp(r'[0-9~`!@#$%&*()_=+}{|\/><:;",]'))
-              ],
-              controller: viewModel.nameController,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  flex: 3,
-                  child: CustomTextField(
-                    title: lang_key.cardNumber.tr,
-                    asterisk: true,
-                    autoValidateMode: null,
-                    keyboardType: TextInputType.number,
-                    hintText: '1234 5678 xxxx xxxx',
-                    validator: (value) {
-                      if(CommonFunctions.validateDefaultField(value) == null) {
-                        if(value!.length != 16) {
-                          return lang_key.cardLength.tr;
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(15, 5, 15, 10),
+        child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          child: Column(
+            children: [
+              StepperText(index: 2, texts: [
+                lang_key.personalInfo.tr,
+                lang_key.address.tr,
+                lang_key.bank.tr
+              ]),
+              CustomTextField(
+                title: lang_key.cardHolderName.tr,
+                asterisk: true,
+                hintText: 'John Doe',
+                validator: (value) => CommonFunctions.validateDefaultField(value),
+                inputFormatters: [
+                  FilteringTextInputFormatter.deny(RegExp(r'[0-9~`!@#$%&*()_=+}{|\/><:;",]'))
+                ],
+                controller: viewModel.nameController,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: CustomTextField(
+                      title: lang_key.cardNumber.tr,
+                      asterisk: true,
+                      autoValidateMode: null,
+                      keyboardType: TextInputType.number,
+                      hintText: '1234 5678 xxxx xxxx',
+                      validator: (value) {
+                        if(CommonFunctions.validateDefaultField(value) == null) {
+                          if(value!.length != 16) {
+                            return lang_key.cardLength.tr;
+                          } else {
+                            return null;
+                          }
                         } else {
-                          return null;
+                          return CommonFunctions.validateDefaultField(value);
                         }
-                      } else {
-                        return CommonFunctions.validateDefaultField(value);
-                      }
-                    },
+                      },
+                    ),
                   ),
-                ),
-                const SizedBox(width: 15,),
-                Expanded(
-                  flex: 2,
-                  child: CustomTextField(
-                    title: lang_key.cvcNumber.tr,
-                    asterisk: true,
-                    autoValidateMode: null,
-                    keyboardType: TextInputType.number,
-                    hintText: 'xxx',
-                    validator: (value) {
-                      if(CommonFunctions.validateDefaultField(value) == null) {
-                        if(value!.length != 3) {
-                          return lang_key.cvcLength.tr;
+                  const SizedBox(width: 15,),
+                  Expanded(
+                    flex: 2,
+                    child: CustomTextField(
+                      title: lang_key.cvcNumber.tr,
+                      asterisk: true,
+                      autoValidateMode: null,
+                      keyboardType: TextInputType.number,
+                      hintText: 'xxx',
+                      validator: (value) {
+                        if(CommonFunctions.validateDefaultField(value) == null) {
+                          if(value!.length != 3) {
+                            return lang_key.cvcLength.tr;
+                          } else {
+                            return null;
+                          }
                         } else {
-                          return null;
+                          return CommonFunctions.validateDefaultField(value);
                         }
-                      } else {
-                        return CommonFunctions.validateDefaultField(value);
-                      }
-                    },
+                      },
+                    ),
                   ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: Get.height * 0.4),
+                child: Column(
+                  children: [
+                    CustomButton(onPressed: () {}, text: lang_key.skipAndSignUp.tr, color: Colors.grey.shade400,),
+                    CustomButton(onPressed: () {}, text: lang_key.register.tr),
+                  ],
                 ),
-              ],
-            ),
-            CustomButton(onPressed: () {}, text: lang_key.skipAndSignUp.tr, color: Colors.grey.shade400,),
-            CustomButton(onPressed: () {}, text: lang_key.register.tr)
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

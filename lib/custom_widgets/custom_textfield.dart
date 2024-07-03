@@ -75,7 +75,7 @@ class CustomTextField extends StatelessWidget {
           ),
           TextFormField(
             cursorColor: Get.isDarkMode ? darkThemeLightGrey : primaryBlack,
-            cursorHeight: 12,
+            cursorHeight: 20,
             inputFormatters: inputFormatters,
             controller: controller,
             initialValue: initialValue,

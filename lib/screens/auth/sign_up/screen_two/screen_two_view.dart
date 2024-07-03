@@ -45,6 +45,7 @@ class ScreenTwoView extends StatelessWidget {
                     color: Get.isDarkMode ? darkThemeLightGrey : primaryBlack,
                   )
                 ),
+              child: const Placeholder(),
               ),
             ),
             CustomTextField(

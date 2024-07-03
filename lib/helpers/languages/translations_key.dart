@@ -43,9 +43,9 @@
   /// Bottom Appbar
   const welcome = 'welcome',
     home = 'home',
-    bookings = 'bookings',
+    booking = 'booking',
     inbox = 'inbox',
-    notifications = 'notifications',
+    notifications = 'notification',
     settings = 'settings';
 
   /// Home
@@ -54,11 +54,44 @@
     popularServices = 'popularServices',
     categories = 'categories';
 
+  /// Service Details
+  const serviceDetails = 'serviceDetails',
+    price = 'price',
+    duration = 'duration',
+    rating = 'rating',
+    measuringUnit = 'measuringUnit',
+    description = 'description',
+    reviews = 'reviews',
+    serviceDesc = 'serviceDesc',
+    serviceRev = 'serviceRev',
+    priceDetails = 'priceDetails', 
+      selectServiceTime = 'selectServiceTime',
+    selectServiceDate = 'selectServiceDate',
+    discount = 'discount';
+
+  /// Bookings Listing
+  const completed = 'completed',
+    otherServices = 'otherServices',
+    cancellationDate = 'cancellationDate',
+    viewEReceipt = 'viewEReceipt',
+    addComments = 'addComments',
+    bookings = 'bookings',
+    cancelled = 'cancelled';
+
+  /// Single Booking Details
+  const services = 'services',
+    bookingDetails = 'bookingDetails';
+
   /// General
   const cont = 'continue',
+    date = 'date',
+    cancel = 'cancel',
     viewAll = 'viewAll',
     sar = 'sar',
     bookNow = 'bookNow',
+    quantity = 'quantity',
+    pending = 'pending',
+    submit = 'submit',
     register = 'register';
 
   /// Error Messages
@@ -68,4 +101,7 @@
   passwordNotMatching = 'passwordNotMatching',
   cardLength = 'cardLength',
   cvcLength = 'cvcLength',
+  selectDateError = 'selectDateError',
+  selectTimeError = 'selectTimeError',
+  selectedTimeShort = 'selectedTimeShort',
   fieldIsRequired = 'fieldRequired';

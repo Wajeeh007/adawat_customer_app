@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 class StepperText extends StatelessWidget {
   const StepperText({super.key, required this.index, required this.texts});
 
+  /// List should contain more than one string
   final List<String> texts;
 
   /// Index range starts from 0 till texts.length - 1

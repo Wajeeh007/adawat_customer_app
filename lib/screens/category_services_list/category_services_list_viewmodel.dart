@@ -1,10 +1,19 @@
+import 'package:adawat_customer_app/models/service.dart';
 import 'package:adawat_customer_app/models/service_category.dart';
 import 'package:get/get.dart';
 
 class CategoryServicesListViewModel extends GetxController {
 
-  RxString selectedCategory = ''.obs;
+  RxBool fetchingCategories = true.obs;
+  RxBool fetchingServices = true.obs;
+  String selectedCategory = '';
 
+  RxList<Service> allServicesList = <Service>[
+    Service(price: 45, serviceName: 'AC Installation', measuringUnit: 'Per Unit', serviceCategory: 'AC Services'),
+    Service(price: 110, serviceName: 'House Cleaning', measuringUnit: 'Per Sq ft.', serviceCategory: 'Cleaning'),
+    Service(price: 80, serviceName: 'Paint', measuringUnit: 'Per Hour', serviceCategory: 'Painting'),
+  ].obs;
+  RxList<Service> visibleServicesList = <Service>[].obs;
   RxList<ServiceCategory> categoriesList = <ServiceCategory>[
     ServiceCategory(name: 'All', selected: true),
     ServiceCategory(name: 'AC Services', selected: false),
@@ -14,10 +23,47 @@ class CategoryServicesListViewModel extends GetxController {
     ServiceCategory(name: 'Cleaning', selected: false),
   ].obs;
 
+  Map<String, dynamic>? arguments = {};
+
   @override
   void onInit() {
-    if(Get.arguments != null)
+    arguments = Get.arguments;
+    if(arguments != null){
+      if (arguments!.containsKey('selectedCategory')) {
+        selectedCategory = arguments!['selectedCategory'];
+      } else {
+        selectedCategory = 'All';
+      }
+    } else {
+      selectedCategory = 'All';
+    }
     super.onInit();
+  }
+
+  @override
+  void onReady() {
+    Future.delayed(const Duration(seconds: 4), () {
+      fetchingCategories.value = false;
+      fetchingServices.value = false;
+    });
+    for (var element in categoriesList) {
+      if(element.name == selectedCategory) {
+        element.selected = true;
+      } else {
+        element.selected = false;
+      }
+      
+      if(element == categoriesList.last) {
+        if(selectedCategory == 'All') {
+          visibleServicesList.addAll(allServicesList);
+          visibleServicesList.refresh();
+        } else {
+          visibleServicesList.addAll(allServicesList.where((element) => element.serviceCategory == selectedCategory));
+          visibleServicesList.refresh();
+        }
+      }
+    }
+    super.onReady();
   }
 
 }

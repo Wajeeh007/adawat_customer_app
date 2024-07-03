@@ -1,7 +1,8 @@
 import 'package:adawat_customer_app/bindings/init_binding.dart';
 import 'package:adawat_customer_app/helpers/app_languages.dart';
-import 'package:adawat_customer_app/screens/bottom_appbar/bottom_appbar_view.dart';
-import 'package:adawat_customer_app/screens/category_services_list/category_services_list_view.dart';
+import 'package:adawat_customer_app/screens/bookings_listing/bookings_listing_view.dart';
+import 'package:adawat_customer_app/screens/cart/cart_view.dart';
+import 'package:adawat_customer_app/screens/single_booking/single_booking_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -31,13 +32,14 @@ class MyApp extends StatelessWidget {
       title: 'Adawat Service App',
       theme: ThemeHelpers.lightTheme,
       darkTheme: ThemeHelpers.darkTheme,
-      home: CategoryServicesListView(),
+      home: CartView(),
       themeMode: ThemeMode.system,
       textDirection: TextDirection.ltr,
       translations: AppLanguages(),
       defaultTransition: Transition.rightToLeftWithFade,
       locale: getLocale(initLanguageController.languageKey.value),
       fallbackLocale: const Locale('en', 'US'),
+      initialBinding: InitBinding(),
       // getPages: AppRoutes.pages,
     );
   }

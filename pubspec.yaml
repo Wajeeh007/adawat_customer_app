@@ -22,9 +22,12 @@ dependencies:
   flutter_svg_provider: ^1.0.7
   dotted_line: ^3.2.2
   google_maps_flutter: ^2.7.0
-#  geolocator: ^12.0.0
   permission_handler: ^11.3.1
   geolocator: ^12.0.0
+  shimmer: ^3.0.0
+  cached_network_image: ^3.3.1
+  flutter_rating_stars: ^1.1.0
+  cherry_toast: ^1.11.0
 
 dev_dependencies:
   flutter_test:

@@ -88,11 +88,85 @@ class English {
       key.services: 'Services',
       key.bookingDetails: 'Booking Details',
 
+      /// Cart
+      key.netTotal: 'Net Total',
+      key.cart: 'Cart',
+      key.slideToDelete: 'Slide an item to delete it',
+
+      /// Checkout - Confirm Address
+      key.location: 'Location',
+      key.promoCode: 'Promo Code',
+      key.apply: 'Apply',
+      key.voucher: 'Voucher',
+      key.total: 'Total',
+      key.addAddress: 'Add Address',
+      key.servicesPrice: 'Services Price',
+
+      /// Checkout - Payment Method
+      key.choosePaymentMethod: 'Choose Payment Method',
+      key.tapToShowCost: 'Tap to show cost details',
+      key.tapToCloseDetails: 'Tap to close cost details',
+      key.addCard: 'Add Card',
+
+      /// Checkout - Order Confirmation
+      key.orderConfirmed: 'Order Confirmed',
+
+      /// Chat
+      key.typeSomething: 'Type something...',
+
+      /// Settings
+      key.profileSettings: 'Profile Settings',
+      key.aboutUs: 'About Us',
+      key.support: 'Support',
+      key.addRemoveAddress: 'Add/Remove Address',
+      key.changePassword: 'Change Password',
+      key.bankCards: 'Bank Cards',
+      key.changePhoneNumber: 'Change Phone Number',
+      key.language: 'Language',
+      key.termsAndConditions: 'Terms & Conditions',
+
+      /// Profile Settings
+      key.saveAndUpdate: 'Save & Update',
+      key.discard: 'Discard',
+
+      /// Bank Cards listing
+      key.searchCard: 'Search Card',
+      key.makeDefaultCard: 'Make Default Card',
+
+      /// Change Password
+      key.createNewPassword: 'Create New Password',
+      key.newPasswordDiff: 'New password should be different from the old password',
+      key.newPassword: 'New Password',
+
+      /// Change Phone Number
+      key.changeNumCaution: 'Changing phone number will require you to enter an OTP, and you shall not be able to use your account until it is verified.\nDo you wish to proceed?',
+      key.enterNewNum: 'Enter new phone number. New number cannot be the same as old number',
+      key.addNewNum: 'Add New Number',
+
+      /// Address Listing
+      key.searchAddress: 'Search Address',
+      key.noAddressFound: 'No Address Found',
+      key.makeDefaultAddress: 'Make Default Address',
+
       /// General
       key.cont: 'Continue',
+      key.general: 'General',
+      key.checkout: 'Checkout',
+      key.expiry: 'Expiry',
+      key.label: 'Label',
+      key.text: 'Text',
+      key.phone: 'Phone',
+      key.searchBy: 'Search by',
+      key.by: 'By',
+      key.yes: 'Yes',
+      key.no: 'No',
+      key.payment: 'Payment',
+      key.name: 'Name',
+      key.proceed: 'Proceed',
       key.date: 'Date',
       key.pending: 'Pending',
       key.cancel: 'Cancel',
+      key.account: 'Account',
       key.sar: 'SAR',
       key.bookNow: 'Book Now',
       key.register: 'Register',
@@ -110,6 +184,8 @@ class English {
       key.selectDateError: 'Select date to proceed',
       key.selectTimeError: 'Select time to proceed',
       key.selectedTimeShort: 'Selected time should be 5 hours greater than current time',
+      key.cardLimitReached: 'You have reached the limit. Remove one to add a new card',
+      key.addressLimitReached: 'You have reached the limit. Remove one to add a new address',
       key.passwordNotMatching: 'Passwords do not match',
   };
 

@@ -14,7 +14,7 @@ class StatusContainer extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(kBorderRadius),
+        borderRadius: BorderRadius.circular(kContainerRadius),
       ),
       child: Text(
         text,

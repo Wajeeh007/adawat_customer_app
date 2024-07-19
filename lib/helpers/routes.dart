@@ -12,6 +12,6 @@ class AppRoutes {
   static final pages = [
       GetPage(name: initRoute, page: () => LoginOptionsView()),
       GetPage(name: loginWithEmail, page: () => EmailLoginView()),
-    GetPage(name: signUpScreenOne, page: () => ScreenOneView()),
+    GetPage(name: signUpScreenOne, page: () => const ScreenOneView()),
     ];
 }

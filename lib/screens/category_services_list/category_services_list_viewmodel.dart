@@ -8,12 +8,12 @@ class CategoryServicesListViewModel extends GetxController {
   RxBool fetchingServices = true.obs;
   String selectedCategory = '';
 
-  RxList<Service> allServicesList = <Service>[
-    Service(price: 45, serviceName: 'AC Installation', measuringUnit: 'Per Unit', serviceCategory: 'AC Services'),
-    Service(price: 110, serviceName: 'House Cleaning', measuringUnit: 'Per Sq ft.', serviceCategory: 'Cleaning'),
-    Service(price: 80, serviceName: 'Paint', measuringUnit: 'Per Hour', serviceCategory: 'Painting'),
+  RxList<ServiceModel> allServicesList = <ServiceModel>[
+    ServiceModel(price: 45, serviceName: 'AC Installation', measuringUnit: 'Per Unit', serviceCategory: 'AC Services'),
+    ServiceModel(price: 110, serviceName: 'House Cleaning', measuringUnit: 'Per Sq ft.', serviceCategory: 'Cleaning'),
+    ServiceModel(price: 80, serviceName: 'Paint', measuringUnit: 'Per Hour', serviceCategory: 'Painting'),
   ].obs;
-  RxList<Service> visibleServicesList = <Service>[].obs;
+  RxList<ServiceModel> visibleServicesList = <ServiceModel>[].obs;
   RxList<ServiceCategory> categoriesList = <ServiceCategory>[
     ServiceCategory(name: 'All', selected: true),
     ServiceCategory(name: 'AC Services', selected: false),

@@ -1,4 +1,3 @@
-import 'package:adawat_customer_app/custom_widgets/custom_appbar.dart';
 import 'package:adawat_customer_app/custom_widgets/location_container.dart';
 import 'package:adawat_customer_app/custom_widgets/status_based_widget.dart';
 import 'package:adawat_customer_app/custom_widgets/title_and_text.dart';
@@ -16,36 +15,35 @@ class BookingsListingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        backBtn: true,
-        title: lang_key.bookings.tr,
-        bottom: TabBar(
-          dividerColor: Colors.transparent,
-          indicatorColor: Get.isDarkMode ? primaryDullYellow : primaryYellow,
-          padding: const EdgeInsets.only(top: 20),
-          labelStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
-            fontWeight: FontWeight.w600,
-            color: Get.isDarkMode ? primaryDullYellow : primaryYellow
-          ),
-          unselectedLabelStyle: Theme.of(context).textTheme.labelLarge,
-          controller: viewModel.tabController,
+    return Column(
+      children: [
+        TabBar(
+            dividerColor: Colors.transparent,
+            indicatorColor: Get.isDarkMode ? primaryDullYellow : primaryYellow,
+            padding: const EdgeInsets.only(top: 20),
+            labelStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+                fontWeight: FontWeight.w600,
+                color: Get.isDarkMode ? primaryDullYellow : primaryYellow
+            ),
+            unselectedLabelStyle: Theme.of(context).textTheme.labelLarge,
+            controller: viewModel.tabController,
             tabs: [
               Text(lang_key.pending.tr),
               Text(lang_key.completed.tr),
               Text(lang_key.cancelled.tr)
             ]
         ),
-        height: 80,
-      ),
-      body: TabBarView(
-        controller: viewModel.tabController,
-        children: const [
-          PendingList(),
-          CompletedList(),
-          CancelledList()
-        ],
-      ),
+        Expanded(
+          child: TabBarView(
+          controller: viewModel.tabController,
+          children: const [
+            PendingList(),
+            CompletedList(),
+            CancelledList()
+          ],
+                ),
+        ),
+    ]
     );
   }
 }
@@ -61,7 +59,7 @@ class PendingList extends StatelessWidget {
         itemCount: 1,
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return BookingContainer(type: ContainerType.pending,);
+          return const BookingContainer(type: ContainerType.pending,);
         },
       ),
     );
@@ -78,7 +76,7 @@ class CompletedList extends StatelessWidget {
       child: ListView.builder(
         itemCount: 1,
         itemBuilder: (context, index) {
-          return BookingContainer(type: ContainerType.completed,);
+          return const BookingContainer(type: ContainerType.completed,);
         },
       ),
     );
@@ -95,7 +93,7 @@ class CancelledList extends StatelessWidget {
       child: ListView.builder(
         itemCount: 1,
         itemBuilder: (context, index) {
-          return BookingContainer(type: ContainerType.cancelled,);
+          return const BookingContainer(type: ContainerType.cancelled,);
         },
       ),
     );
@@ -114,8 +112,8 @@ class BookingContainer extends StatelessWidget {
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: primaryGrey,
-        boxShadow: Get.isDarkMode ? null : [kShadow],
-        borderRadius: BorderRadius.circular(kBorderRadius),
+        boxShadow: Get.isDarkMode ? null : kShadow,
+        borderRadius: BorderRadius.circular(kContainerRadius),
       ),
       child: InkWell(
         onTap: () => Get.to(() => const SingleBookingView()),
@@ -128,9 +126,9 @@ class BookingContainer extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(kBorderRadius),
+                    borderRadius: BorderRadius.circular(kContainerRadius),
                       child: Image.asset(
-                        'assets/images/example_image.jpg',
+                        'assets/vectors/example_image.jpg',
                         fit: BoxFit.fill,
                         width: 100,
                         height: 80,
@@ -160,7 +158,7 @@ class BookingContainer extends StatelessWidget {
                               // margin: const EdgeInsets.only(top: 11),
                               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(kBorderRadius),
+                                borderRadius: BorderRadius.circular(kContainerRadius),
                                 color: pendingStatusBgColor
                               ),
                               child: Text(
@@ -191,7 +189,7 @@ class BookingContainer extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
                     decoration: BoxDecoration(
                       color: primaryDullYellow,
-                      borderRadius: BorderRadius.circular(kBorderRadius),
+                      borderRadius: BorderRadius.circular(kContainerRadius),
                     ),
                     child: Text(
                       '1 more',

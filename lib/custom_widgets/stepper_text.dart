@@ -30,7 +30,7 @@ class StepperText extends StatelessWidget {
                 Text(
                   texts[index1],
                   style: index <= index1 ? Theme.of(context).textTheme.labelMedium : Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: primaryYellow
+                      color: Get.isDarkMode ? primaryDullYellow : primaryYellow
                   ),
                 ),
                 Padding(
@@ -40,9 +40,9 @@ class StepperText extends StatelessWidget {
                     dashLength: 2,
                     dashGapLength: 2,
                     lineLength: Get.width * 0.15,
-                  ) : const Icon(
+                  ) : Icon(
                     Icons.check_circle_outline_rounded,
-                    color: primaryYellow,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 )
               ],

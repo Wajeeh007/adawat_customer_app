@@ -1,11 +1,10 @@
-import 'package:adawat_customer_app/helpers/constants.dart';
 import 'package:adawat_customer_app/helpers/global_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? includeCart;
-  final String? title;
+  final String? titleText;
   final List<Widget>? action;
   final Widget? leading;
   final double? height;
@@ -14,10 +13,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? backBtn;
   final Color? bgColor;
   final Widget? bottom;
+  final Widget? titleWidget;
+  final bool centerTitle;
 
   const CustomAppBar(
       {super.key,
-        this.title,
+        this.titleText,
+        this.titleWidget,
+        this.centerTitle = true,
         this.includeCart,
         this.action,
         this.leading,
@@ -33,12 +36,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: bgColor,
+      backgroundColor: bgColor ?? Theme.of(context).appBarTheme.backgroundColor,
+      surfaceTintColor: Theme.of(context).appBarTheme.backgroundColor,
       automaticallyImplyLeading: backBtn!,
       leadingWidth: leadingWidth,
+      centerTitle: centerTitle,
+      shadowColor: Theme.of(context).shadowColor,
       elevation: elevation ?? 0,
-      // centerTitle: true,
-      actions: includeCart == true ? [
+      actions: action ?? (includeCart == true ? [
         Stack(
           children: [
             IconButton(
@@ -49,7 +54,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               top: 8,
               right: 10,
               child: CircleAvatar(
-                backgroundColor: primaryDullYellow,
+                backgroundColor: Theme.of(context).colorScheme.primary,
                 radius: 7,
                 child: Text(
                   GlobalVariables.itemsInCart.value.toString(),
@@ -62,11 +67,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             )
           ],
         )
-      ] : null,
-      title: title != null ? Text(
-        title!,
+      ] : null),
+      title: titleWidget ?? (titleText != null ? Text(
+        titleText!,
         style: Theme.of(context).textTheme.bodyMedium,
-      ) : null,
+      ) : null),
       leading: backBtn == false ? null : leading ??
               IconButton(
                 onPressed: () => Get.back(),

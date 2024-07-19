@@ -30,7 +30,7 @@ class EmailLoginView extends StatelessWidget {
                 lang_key.enterCredentials.tr,
                 style: Theme.of(context).textTheme.titleSmall,
               ),
-              Image(image: const Svg('assets/images/login_vector.svg',), height: Get.height * 0.35,),
+              Image(image: const Svg('assets/vectors/login_vector.svg',), height: Get.height * 0.35,),
               Form(
                 child: Column(
                   children: [
@@ -50,7 +50,7 @@ class EmailLoginView extends StatelessWidget {
                       suffixIcon: PasswordVisibilityIcon(visibility: viewModel.obscurePassword)
                     ),
                     ),
-                    CustomButton(onPressed: () {}, text: lang_key.login.tr, textColor: primaryBlack,)
+                    CustomButton(onTap: () {}, text: lang_key.login.tr, textColor: primaryBlack,)
                   ],
                 ),
               ),

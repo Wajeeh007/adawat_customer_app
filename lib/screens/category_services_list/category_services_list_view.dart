@@ -18,7 +18,7 @@ class CategoryServicesListView extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         backBtn: true,
-        title: lang_key.categories.tr,
+        titleText: lang_key.categories.tr,
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -56,7 +56,7 @@ class CategoriesList extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 6),
               decoration: BoxDecoration(
                 color: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
-                borderRadius: BorderRadius.circular(kBorderRadius)
+                borderRadius: BorderRadius.circular(kContainerRadius)
               ),
             );
           }),
@@ -98,7 +98,7 @@ class CategoryTitleContainer extends StatelessWidget {
         duration: const Duration(milliseconds: 250),
         decoration: BoxDecoration(
           color: serviceCategory.selected! ? primaryDullYellow : Colors.transparent,
-          borderRadius: BorderRadius.circular(kBorderRadius),
+          borderRadius: BorderRadius.circular(kContainerRadius),
           border: Border.all(
             color: primaryDullYellow,
             width: 1.2

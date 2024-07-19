@@ -22,27 +22,11 @@ class LocationContainer extends StatelessWidget {
           width: double.infinity,
           height: 150,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(kBorderRadius)
+            borderRadius: BorderRadius.circular(kContainerRadius)
           ),
           child: const Placeholder(),
         )
       ],
     );
-    //   Container(
-    //   width: double.infinity,
-    //   height: isAddressReq ? null : 150,
-    //   decoration: isAddressReq ? null : BoxDecoration(
-    //     borderRadius: BorderRadius.circular(kBorderRadius)
-    //   ),
-    //   child: isAddressReq ? Column(
-    //     children: [
-    //       TitleAndText(
-    //         title: lang_key.address.tr,
-    //         text: 'House No 220, Street No 18, Shaheen Housing Scheme, Warsak Road, Peshawar',
-    //       ),
-    //       SizedBox(child: const Placeholder()),
-    //     ],
-    //   ) : const Placeholder(),
-    // );
   }
 }

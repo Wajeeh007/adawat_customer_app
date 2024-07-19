@@ -1,5 +1,6 @@
 import 'package:adawat_customer_app/helpers/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomTextButton extends StatelessWidget {
   const CustomTextButton({super.key, required this.onTap, required this.text});
@@ -14,8 +15,8 @@ class CustomTextButton extends StatelessWidget {
       child: Text(
         text,
         style: Theme.of(context).textTheme.labelMedium?.copyWith(
-          color: primaryDullYellow,
-          decorationColor: primaryDullYellow,
+          color: Get.isDarkMode ? primaryDullYellow : primaryYellow,
+          decorationColor: Get.isDarkMode ? primaryDullYellow : primaryYellow,
           decoration: TextDecoration.underline
         ),
       ),

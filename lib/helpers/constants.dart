@@ -21,22 +21,25 @@ const completedStatusBgColor = Color(0xffb7f9a9);
 const completedTextColor = Colors.green;
 
 /// Container Shadow
-BoxShadow kShadow = BoxShadow(
+List<BoxShadow> kShadow = [
+  BoxShadow(
     offset: const Offset(0, 10),
     spreadRadius: 0.05,
     blurRadius: 20,
     color: Get.context!.theme.shadowColor
-);
+)];
 
-/// Container Decoration
-BoxDecoration kDecoration = BoxDecoration(
-    color: Get.isDarkMode ? primaryGrey : backgroundWhite,
-    boxShadow: Get.isDarkMode ? null : [kShadow],
-    borderRadius: BorderRadius.circular(kBorderRadius)
-);
+BorderRadius kBorderRadius = BorderRadius.circular(kContainerRadius);
+
+// /// Container Decoration
+// BoxDecoration kDecoration = BoxDecoration(
+//     color: Theme.of(Get.context!).colorScheme.primaryContainer,
+//     boxShadow: Get.isDarkMode ? null : [kShadow],
+//     borderRadius: BorderRadius.circular(kContainerRadius)
+// );
 
 /// Numerical Constants
-const kBorderRadius = 15.0;
+const kContainerRadius = 15.0;
 
 /// Type of status
-enum ContainerType { pending, completed, cancelled}
+enum ContainerType {pending, completed, cancelled}

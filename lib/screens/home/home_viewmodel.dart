@@ -29,10 +29,10 @@ class HomeViewModel extends GetxController {
     SpecialOffersModel(url: ''),
     SpecialOffersModel(url: ''),
   ].obs;
-  RxList<Service> popularServicesList = <Service>[
-    Service(price: 45, serviceName: 'AC Installation', measuringUnit: 'Per Unit', serviceCategory: 'AC Services'),
-    Service(price: 110, serviceName: 'House Cleaning', measuringUnit: 'Per Sq ft.', serviceCategory: 'Cleaning'),
-    Service(price: 80, serviceName: 'Paint', measuringUnit: 'Per Hour', serviceCategory: 'Painting'),
+  RxList<ServiceModel> popularServicesList = <ServiceModel>[
+    ServiceModel(price: 45, serviceName: 'AC Installation', measuringUnit: 'Per Unit', serviceCategory: 'AC Services'),
+    ServiceModel(price: 110, serviceName: 'House Cleaning', measuringUnit: 'Per Sq ft.', serviceCategory: 'Cleaning'),
+    ServiceModel(price: 80, serviceName: 'Paint', measuringUnit: 'Per Hour', serviceCategory: 'Painting'),
   ].obs;
 
   /// Slider Index

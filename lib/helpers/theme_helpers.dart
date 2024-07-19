@@ -8,18 +8,31 @@ class ThemeHelpers {
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
   ).copyWith(
+    bottomAppBarTheme: BottomAppBarTheme(
+      shadowColor: lightModeShadowGrey,
+      padding: const EdgeInsets.all(15),
+      elevation: 10,
+      color: backgroundWhite
+    ),
     shadowColor: lightModeShadowGrey,
-      // splashFactory: NoSplash.splashFactory,
+      primaryColor: primaryYellow,
+      splashFactory: NoSplash.splashFactory,
       brightness: Brightness.light,
       scaffoldBackgroundColor: backgroundWhite,
       textTheme: TextThemes.textTheme(color: primaryBlack),
-      colorScheme: ColorScheme.fromSeed(seedColor: backgroundWhite),
+      colorScheme: ColorScheme.fromSeed(
+          seedColor: backgroundWhite,
+          primaryContainer: backgroundWhite,
+          primary: primaryYellow, /// Primary is used as the variant of yellow used in this theme
+          secondary: lightThemeBorderGrey /// Secondary is the second most used color. This is used as border color, description text color and shadow color
+      ),
       iconButtonTheme: IconButtonThemeData(style: IconButton.styleFrom(
           foregroundColor: primaryBlack, iconSize: 20)),
       iconTheme: const IconThemeData(color: primaryBlack, size: 20,),
       appBarTheme: const AppBarTheme(
           centerTitle: true,
           backgroundColor: backgroundWhite,
+          surfaceTintColor: backgroundWhite,
           scrolledUnderElevation: 0.0,
           systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.transparent,
@@ -38,22 +51,22 @@ class ThemeHelpers {
           filled: true,
           fillColor: Colors.transparent,
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(kBorderRadius),
+              borderRadius: BorderRadius.circular(kContainerRadius),
               borderSide: const BorderSide(
                   color: lightThemeBorderGrey, width: 1.2)
           ),
           focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(kBorderRadius),
+              borderRadius: BorderRadius.circular(kContainerRadius),
               borderSide: const BorderSide(
                   color: lightThemeBorderGrey, width: 2)
           ),
           errorBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: errorRed, width: 1.2),
-            borderRadius: BorderRadius.circular(kBorderRadius),
+            borderRadius: BorderRadius.circular(kContainerRadius),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: errorRed, width: 2),
-            borderRadius: BorderRadius.circular(kBorderRadius),
+            borderRadius: BorderRadius.circular(kContainerRadius),
           )
       ),
       progressIndicatorTheme: const ProgressIndicatorThemeData(
@@ -137,18 +150,28 @@ class ThemeHelpers {
   static ThemeData darkTheme = ThemeData(
       useMaterial3: true
   ).copyWith(
+      bottomAppBarTheme: const BottomAppBarTheme(
+        elevation: 0,
+          padding: EdgeInsets.all(15)
+      ),
     shadowColor: primaryBlack,
       textTheme: TextThemes.textTheme(color: darkThemeLightGrey),
-      // splashFactory: NoSplash.splashFactory,
+      splashFactory: NoSplash.splashFactory,
       brightness: Brightness.dark,
       scaffoldBackgroundColor: primaryBlack,
       iconButtonTheme: IconButtonThemeData(style: IconButton.styleFrom(
           foregroundColor: darkThemeLightGrey, iconSize: 20)),
-      colorScheme: ColorScheme.fromSeed(seedColor: darkThemeLightGrey),
+      colorScheme: ColorScheme.fromSeed(
+          seedColor: darkThemeLightGrey,
+        primaryContainer: primaryGrey,
+        primary: primaryDullYellow, /// Primary is used as the variant of yellow used in this theme
+        secondary: darkThemeLightGrey /// Secondary is the second most used color. This is used as border color, description text color and shadow color
+      ),
       iconTheme: const IconThemeData(color: darkThemeLightGrey, size: 20,),
       appBarTheme: const AppBarTheme(
           centerTitle: true,
           backgroundColor: primaryBlack,
+          surfaceTintColor: primaryBlack,
           scrolledUnderElevation: 0.0,
           systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.transparent,
@@ -167,21 +190,21 @@ class ThemeHelpers {
           filled: true,
           fillColor: Colors.transparent,
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(kBorderRadius),
+              borderRadius: BorderRadius.circular(kContainerRadius),
               borderSide: const BorderSide(
                   color: darkThemeLightGrey, width: 1.2)
           ),
           focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(kBorderRadius),
+              borderRadius: BorderRadius.circular(kContainerRadius),
               borderSide: const BorderSide(color: darkThemeLightGrey, width: 2)
           ),
           errorBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: errorRed, width: 1.2),
-            borderRadius: BorderRadius.circular(kBorderRadius),
+            borderRadius: BorderRadius.circular(kContainerRadius),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: errorRed, width: 2),
-            borderRadius: BorderRadius.circular(kBorderRadius),
+            borderRadius: BorderRadius.circular(kContainerRadius),
           )
       ),
       progressIndicatorTheme: const ProgressIndicatorThemeData(

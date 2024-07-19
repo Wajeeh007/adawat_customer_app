@@ -19,7 +19,7 @@ class SingleBookingView extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         backBtn: true,
-        title: lang_key.bookingDetails.tr,
+        titleText: lang_key.bookingDetails.tr,
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -132,16 +132,15 @@ class ServiceContainer extends StatelessWidget {
       height: 90,
       margin: const EdgeInsets.symmetric(vertical: 6),
       padding: const EdgeInsets.symmetric(vertical: 6),
-      // decoration: kDecoration,
       child: Row(
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(kBorderRadius),
+                borderRadius: BorderRadius.circular(kContainerRadius),
                 child: Image.asset(
-                    'assets/images/example_image.jpg',
+                    'assets/vectors/example_image.jpg',
                   height: 80,
                   width: 100,
                   fit: BoxFit.fill,

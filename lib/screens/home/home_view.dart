@@ -9,10 +9,10 @@ import 'package:adawat_customer_app/screens/home/special_offers_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeView extends StatelessWidget {
-  HomeView({super.key});
+final HomeViewModel viewModel = Get.put<HomeViewModel>(HomeViewModel());
 
-  final HomeViewModel viewModel = Get.put(HomeViewModel());
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,9 @@ class HomeView extends StatelessWidget {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  ServiceCategoriesSlider(),
-                  OffersSlider(),
-                  PopularServicesList()
+                  const ServiceCategoriesSlider(),
+                  const OffersSlider(),
+                  const PopularServicesList()
                 ]
               ),
             )
@@ -39,9 +39,7 @@ class HomeView extends StatelessWidget {
 
 /// Categories horizontal list
 class ServiceCategoriesSlider extends StatelessWidget {
-  ServiceCategoriesSlider({super.key});
-
-  final HomeViewModel viewModel = Get.find();
+  const ServiceCategoriesSlider({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +100,7 @@ class CategoryListItem extends StatelessWidget {
                     color: Colors.transparent,
                     width: 1.2
                 ),
-                borderRadius: BorderRadius.circular(kBorderRadius),
+                borderRadius: BorderRadius.circular(kContainerRadius),
                 color: Colors.transparent,
               ),
               child: const SizedBox(width: 45, height: 45, child: Placeholder(),)
@@ -130,9 +128,7 @@ class CategoryListItem extends StatelessWidget {
 
 /// Special Offers sliding images widget
 class OffersSlider extends StatelessWidget {
-  OffersSlider({super.key});
-
-  final HomeViewModel viewModel = Get.find();
+  const OffersSlider({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -179,7 +175,7 @@ class OfferContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(kBorderRadius),
+        borderRadius: BorderRadius.circular(kContainerRadius),
         border: Border.all(color: Colors.transparent)
       ),
       child: const Placeholder(), // TODO: Implement Cached Network Image,
@@ -189,9 +185,7 @@ class OfferContainer extends StatelessWidget {
 
 /// Popular Services list
 class PopularServicesList extends StatelessWidget {
-  PopularServicesList({super.key});
-
-  final HomeViewModel viewModel = Get.find();
+  const PopularServicesList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -211,7 +205,7 @@ class PopularServicesList extends StatelessWidget {
             itemCount: viewModel.popularServicesList.length,
             itemBuilder: (context, index) {
 
-              Service service = viewModel.popularServicesList[index];
+              ServiceModel service = viewModel.popularServicesList[index];
 
               return ServiceItem(service: service);
             },

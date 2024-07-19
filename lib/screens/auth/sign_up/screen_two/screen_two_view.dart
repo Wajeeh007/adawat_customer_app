@@ -40,7 +40,7 @@ class ScreenTwoView extends StatelessWidget {
                 height: 130,
                 decoration: BoxDecoration(
                   color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(kBorderRadius),
+                  borderRadius: BorderRadius.circular(kContainerRadius),
                   border: Border.all(
                     color: Get.isDarkMode ? darkThemeLightGrey : primaryBlack,
                   )
@@ -118,7 +118,7 @@ class ScreenTwoView extends StatelessWidget {
               maxLines: 5,
               controller: viewModel.noteController,
             ),
-            CustomButton(onPressed: () {}, text: lang_key.cont.tr)
+            CustomButton(onTap: () {}, text: lang_key.cont.tr)
           ],
         ),
       ),

@@ -28,6 +28,7 @@ dependencies:
   cached_network_image: ^3.3.1
   flutter_rating_stars: ^1.1.0
   cherry_toast: ^1.11.0
+  flutter_swipe_action_cell: ^3.1.3
 
 dev_dependencies:
   flutter_test:
@@ -39,7 +40,9 @@ flutter:
   uses-material-design: true
 
   assets:
-  - assets/images/
+  - assets/vectors/
+  - assets/logos/
+  - assets/icons/
 
 flutter_native_splash:
   # This package generates native code to customize Flutter's default white native splash screen
@@ -58,7 +61,7 @@ flutter_native_splash:
   # splash screen to a png image.  This is useful for gradients. The image will be stretch to the
   # size of the app. Only one parameter can be used, color and background_image cannot both be set.
   # color: "#42a5f5"
-  background_image: "assets/images/company_logo_light.png"
+  background_image: "assets/logos/company_logo_light.png"
 
   # Optional parameters are listed below.  To enable a parameter, uncomment the line by removing
   # the leading # character.
@@ -82,7 +85,7 @@ flutter_native_splash:
   # background_image_dark must be specified.  color_dark and background_image_dark cannot both be
   # set.
   #color_dark: "#042a49"
-  background_image_dark: "assets/images/company_logo_dark.png"
+  background_image_dark: "assets/logos/company_logo_dark.png"
   #image_dark: assets/splash-invert.png
   #branding_dark: assets/dart_dark.png
 

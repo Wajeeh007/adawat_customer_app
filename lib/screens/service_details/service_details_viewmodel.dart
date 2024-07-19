@@ -15,7 +15,7 @@ class ServiceDetailsViewModel extends GetxController with GetTickerProviderState
   RxInt selectedQuantity = 1.obs;
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
-  Rx<Service> serviceDetails = Service(price: 45, serviceName: 'AC Installation', measuringUnit: 'Per Unit', serviceCategory: 'AC Services').obs;
+  Rx<ServiceModel> serviceDetails = ServiceModel(price: 45, serviceName: 'AC Installation', measuringUnit: 'Per Unit', serviceCategory: 'AC Services').obs;
 
 
   void showDateAndTimePicker(BuildContext context) async {

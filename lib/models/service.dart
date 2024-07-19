@@ -1,4 +1,4 @@
-class Service {
+class ServiceModel {
 
   String? serviceName;
   double? price;
@@ -6,5 +6,5 @@ class Service {
   String? measuringUnit;
   String? serviceCategory;
 
-  Service({this.url, this.price, this.serviceName, this.measuringUnit, this.serviceCategory});
+  ServiceModel({this.url, this.price, this.serviceName, this.measuringUnit, this.serviceCategory});
 }

@@ -20,7 +20,7 @@ class StatusBasedWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return switch (type) {
       ContainerType.pending =>
-          CustomButton(onPressed: () {}, text: lang_key.cancel.tr, color: errorRed, textColor: backgroundWhite, height: 45,),
+          CustomButton(onTap: () {}, text: lang_key.cancel.tr, color: errorRed, textColor: backgroundWhite, height: 45,),
       ContainerType.completed =>
           Column(
             children: [
@@ -49,7 +49,7 @@ class StatusBasedWidget extends StatelessWidget {
                 hintText: lang_key.addComments.tr,
               ),
               CustomButton(
-                onPressed: () {},
+                onTap: () {},
                 text: lang_key.submit.tr,
                 color: Get.isDarkMode ? primaryDullYellow : primaryYellow,
                 height: 45,

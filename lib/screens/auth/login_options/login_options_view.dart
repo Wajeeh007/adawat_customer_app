@@ -1,11 +1,11 @@
 import 'package:adawat_customer_app/helpers/constants.dart';
 import 'package:adawat_customer_app/helpers/routes.dart';
-import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:adawat_customer_app/helpers/languages/translations_key.dart' as lang_key;
+import '../../../custom_widgets/or_text_and_line.dart';
 import 'login_options_viewmodel.dart';
 
 class LoginOptionsView extends StatelessWidget {
@@ -32,7 +32,7 @@ class LoginOptionsView extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      child: Image(image: const Svg('assets/images/login_options_vector.svg',), height: Get.height * 0.25,),
+                      child: Image(image: const Svg('assets/vectors/login_options_vector.svg',), height: Get.height * 0.25,),
                     ),
                     const ContinueWithEmail(),
                     const OrTextAndLine(),
@@ -113,37 +113,6 @@ class ContinueWithEmail extends StatelessWidget {
   }
 }
 
-class OrTextAndLine extends StatelessWidget {
-  const OrTextAndLine({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 25.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          DottedLine(
-            lineLength: Get.width * 0.35,
-            dashColor: Get.isDarkMode ? darkThemeLightGrey : primaryBlack,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 3.0),
-            child: Text(
-              lang_key.or.tr,
-              style: Theme.of(context).textTheme.labelMedium,
-            ),
-          ),
-          DottedLine(
-            lineLength: Get.width * 0.35,
-            dashColor: Get.isDarkMode ? darkThemeLightGrey : primaryBlack,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class SocialAccButton extends StatelessWidget {
   const SocialAccButton({super.key, required this.platformName, required this.onPressed});
 
@@ -157,7 +126,7 @@ class SocialAccButton extends StatelessWidget {
       child: InkWell(
         onTap: onPressed,
         child: Image.asset(
-                'assets/images/${platformName.toLowerCase()}_logo.png',
+                'assets/logos/${platformName.toLowerCase()}_logo.png',
               height: 35,
               width: 35,
               color: platformName.toLowerCase() == 'apple' ? Get.isDarkMode ? primaryWhite : null : null,

@@ -46,7 +46,7 @@ class OtpVerificationView extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    CustomButton(onPressed: () {}, text: lang_key.verify.tr,),
+                    CustomButton(onTap: () {}, text: lang_key.verify.tr,),
                   ],
                 ),
               )

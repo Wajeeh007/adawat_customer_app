@@ -11,10 +11,10 @@ import 'package:get/get.dart';
 import 'package:adawat_customer_app/helpers/languages/translations_key.dart' as lang_key;
 import '../../../../helpers/constants.dart';
 
-class ScreenOneView extends StatelessWidget {
-  ScreenOneView({super.key});
+final ScreenOneViewModel viewModel = Get.put<ScreenOneViewModel>(ScreenOneViewModel());
 
-  final ScreenOneViewModel viewModel = Get.put<ScreenOneViewModel>(ScreenOneViewModel());
+class ScreenOneView extends StatelessWidget {
+  const ScreenOneView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class ScreenOneView extends StatelessWidget {
               lang_key.address.tr,
               lang_key.bank.tr
             ]),
-            Image(image: const Svg('assets/images/sign_up_vector.svg',), height: Get.height * 0.3,),
+            Image(image: const Svg('assets/vectors/sign_up_vector.svg',), height: Get.height * 0.3,),
             Form(
               key: viewModel.formKey,
               child: Column(
@@ -56,7 +56,7 @@ class ScreenOneView extends StatelessWidget {
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value)  => CommonFunctions.validateEmail(value)
                   ),
-                  PhoneNoTextField(),
+                  const PhoneNoTextField(),
                   Obx(() => CustomTextField(
                     asterisk: true,
                     hintText: '******',
@@ -92,7 +92,7 @@ class ScreenOneView extends StatelessWidget {
                     },
                   )),
                   CustomButton(
-                      onPressed: () {
+                      onTap: () {
                         if(viewModel.formKey.currentState!.validate()) {
 
                         }
@@ -109,10 +109,9 @@ class ScreenOneView extends StatelessWidget {
   }
 }
 
+/// Textfield for phone number. Contains two fields but one is set to be onlyRead because it is for country code
 class PhoneNoTextField extends StatelessWidget {
-  PhoneNoTextField({super.key});
-
-  final ScreenOneViewModel viewModel = Get.find();
+  const PhoneNoTextField({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +142,7 @@ class PhoneNoTextField extends StatelessWidget {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                       color: Colors.transparent,
-                      borderRadius: BorderRadius.circular(kBorderRadius),
+                      borderRadius: BorderRadius.circular(kContainerRadius),
                       border: Border.all(
                           color: Get.isDarkMode ? darkThemeLightGrey : lightThemeBorderGrey,
                           width: 1.2

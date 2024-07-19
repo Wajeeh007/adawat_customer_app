@@ -90,8 +90,8 @@ class ScreenThreeView extends StatelessWidget {
                 padding: EdgeInsets.only(top: Get.height * 0.4),
                 child: Column(
                   children: [
-                    CustomButton(onPressed: () {}, text: lang_key.skipAndSignUp.tr, color: Colors.grey.shade400,),
-                    CustomButton(onPressed: () {}, text: lang_key.register.tr),
+                    CustomButton(onTap: () {}, text: lang_key.skipAndSignUp.tr, color: Colors.grey.shade400,),
+                    CustomButton(onTap: () {}, text: lang_key.register.tr),
                   ],
                 ),
               )

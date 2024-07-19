@@ -23,6 +23,8 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final List<TextInputFormatter>? inputFormatters;
+  final EdgeInsets? padding;
+  final double borderRadius;
 
   const CustomTextField({
     super.key,
@@ -45,12 +47,14 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.initialValue,
     this.inputFormatters,
+    this.padding,
+    this.borderRadius = kContainerRadius
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: title == null ? 5.0 : 8.0),
+      padding: padding ?? EdgeInsets.symmetric(vertical: title == null ? 5.0 : 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -74,6 +78,9 @@ class CustomTextField extends StatelessWidget {
             ),
           ),
           TextFormField(
+            onTapOutside: (onTap) {
+              FocusManager.instance.primaryFocus!.unfocus();
+            },
             cursorColor: Get.isDarkMode ? darkThemeLightGrey : primaryBlack,
             cursorHeight: 20,
             inputFormatters: inputFormatters,
@@ -91,7 +98,7 @@ class CustomTextField extends StatelessWidget {
             style: Theme.of(context).textTheme.labelMedium,
             decoration: InputDecoration(
               hintStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: lightThemeBorderGrey
+                color: Get.isDarkMode ? darkThemeLightGrey.withOpacity(0.6) : lightThemeBorderGrey
               ),
               errorStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: errorRed

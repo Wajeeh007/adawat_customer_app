@@ -9,35 +9,23 @@ import 'custom_button.dart';
 class ServiceItem extends StatelessWidget {
   const ServiceItem({super.key, required this.service});
 
-  final Service service;
+  final ServiceModel service;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
-      height: 105,
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Get.isDarkMode ? darkThemeLightGrey : Colors.white,
-          width: 0.1,
-        ),
-        color: Get.isDarkMode ? Colors.transparent : Colors.white,
-        borderRadius: BorderRadius.circular(kBorderRadius),
-        boxShadow: Get.isDarkMode ? null : [
-          BoxShadow(
-              color: darkThemeLightGrey.withOpacity(0.6),
-              spreadRadius: 0.05,
-              blurRadius: 10,
-              blurStyle: BlurStyle.outer,
-              offset: const Offset(0, 0)
-          )
-        ],
+        color: Theme.of(context).colorScheme.primaryContainer,
+        borderRadius: kBorderRadius,
+        boxShadow: Get.isDarkMode ? null : kShadow,
       ),
       child: Row(
         children: [
-          const Expanded(
-              flex: 2,
-              child: Placeholder()
+          const SizedBox(
+            height: 100,
+              width: 90,
+              child: Placeholder(),
           ),
           Expanded(
               flex: 5,
@@ -86,7 +74,7 @@ class ServiceItem extends StatelessWidget {
                           ),
                         ),
                         CustomButton(
-                          onPressed: () {},
+                          onTap: () {},
                           text: lang_key.bookNow.tr,
                           width: 80,
                           textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
@@ -120,7 +108,7 @@ class ShimmerServiceItem extends StatelessWidget {
       height: 105,
       decoration: BoxDecoration(
         color: Get.isDarkMode ? Colors.transparent : Colors.white,
-        borderRadius: BorderRadius.circular(kBorderRadius),
+        borderRadius: BorderRadius.circular(kContainerRadius),
       ),
       child: Row(
         children: [
@@ -132,7 +120,7 @@ class ShimmerServiceItem extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     color: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
-                    borderRadius: BorderRadius.circular(kBorderRadius)
+                    borderRadius: BorderRadius.circular(kContainerRadius)
                   ),
                 ),
               )
@@ -156,7 +144,7 @@ class ShimmerServiceItem extends StatelessWidget {
                             width: 150,
                             decoration: BoxDecoration(
                               color: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
-                              borderRadius: BorderRadius.circular(kBorderRadius)
+                              borderRadius: BorderRadius.circular(kContainerRadius)
                             ),
                           ),
                         ),
@@ -169,7 +157,7 @@ class ShimmerServiceItem extends StatelessWidget {
                             width: 80,
                             decoration: BoxDecoration(
                                 color: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
-                                borderRadius: BorderRadius.circular(kBorderRadius)
+                                borderRadius: BorderRadius.circular(kContainerRadius)
                             ),
                           ),
                         ),
@@ -186,7 +174,7 @@ class ShimmerServiceItem extends StatelessWidget {
                             width: 100,
                             decoration: BoxDecoration(
                                 color: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
-                                borderRadius: BorderRadius.circular(kBorderRadius)
+                                borderRadius: BorderRadius.circular(kContainerRadius)
                             ),
                           ),
                         ),
@@ -199,7 +187,7 @@ class ShimmerServiceItem extends StatelessWidget {
                             width: 80,
                             decoration: BoxDecoration(
                                 color: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
-                                borderRadius: BorderRadius.circular(kBorderRadius)
+                                borderRadius: BorderRadius.circular(kContainerRadius)
                             ),
                           ),
                         ),

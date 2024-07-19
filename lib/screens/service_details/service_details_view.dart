@@ -21,7 +21,7 @@ class ServiceDetailsView extends StatelessWidget {
       appBar: CustomAppBar(
         backBtn: true,
         includeCart: true,
-        title: lang_key.serviceDetails.tr,
+        titleText: lang_key.serviceDetails.tr,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
@@ -33,9 +33,9 @@ class ServiceDetailsView extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(kBorderRadius),
+                    borderRadius: BorderRadius.circular(kContainerRadius),
                       child: Image.asset(
-                        'assets/images/example_image.jpg',
+                        'assets/vectors/example_image.jpg',
                         fit: BoxFit.fitWidth,
                       ),
                   ),
@@ -57,7 +57,7 @@ class ServiceDetailsView extends StatelessWidget {
       return Container(
         decoration: BoxDecoration(
           color: Get.isDarkMode ? primaryGrey : Colors.white,
-          borderRadius: BorderRadius.circular(kBorderRadius)
+          borderRadius: BorderRadius.circular(kContainerRadius)
         ),
         padding: const EdgeInsets.all(10),
         height: 230,
@@ -94,8 +94,8 @@ class ServiceDetailsView extends StatelessWidget {
                   child: SizedBox(
                     height: 70,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(kBorderRadius),
-                      child: Image.asset('assets/images/example_image.jpg', fit: BoxFit.fill,),
+                      borderRadius: BorderRadius.circular(kContainerRadius),
+                      child: Image.asset('assets/vectors/example_image.jpg', fit: BoxFit.fill,),
                     ),
                   ),
                 ),
@@ -160,7 +160,7 @@ class ServiceDetailsView extends StatelessWidget {
               child: Align(
                 alignment: Alignment.bottomCenter,
                   child: CustomButton(
-                      onPressed: () => Get.back(),
+                      onTap: () => Get.back(),
                       text: lang_key.cont.tr),
               ),
             )
@@ -185,7 +185,7 @@ class DetailsTopContainer extends StatelessWidget {
         width: viewModel.containersWidth,
         decoration: BoxDecoration(
             color: Get.isDarkMode ? primaryGrey : Colors.white,
-            borderRadius: BorderRadius.circular(kBorderRadius),
+            borderRadius: BorderRadius.circular(kContainerRadius),
             boxShadow: [
               BoxShadow(
                   offset: const Offset(0, 10),
@@ -316,7 +316,7 @@ class DetailsMiddleContainer extends StatelessWidget {
       width: viewModel.containersWidth,
       decoration: BoxDecoration(
           color: Get.isDarkMode ? primaryGrey : Colors.white,
-          borderRadius: BorderRadius.circular(kBorderRadius),
+          borderRadius: BorderRadius.circular(kContainerRadius),
           boxShadow: Get.isDarkMode ? null : [
             BoxShadow(
                 offset: const Offset(0, 10),
@@ -380,7 +380,7 @@ class DetailsBottomContainer extends StatelessWidget {
       width: viewModel.containersWidth,
       // height: 50,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(kBorderRadius),
+        borderRadius: BorderRadius.circular(kContainerRadius),
         color: Get.isDarkMode ? primaryGrey : Colors.white,
           boxShadow: Get.isDarkMode ? null : [
             BoxShadow(
@@ -435,7 +435,7 @@ class DescAndRevContainers extends StatelessWidget {
       height: 300,
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(kBorderRadius),
+          borderRadius: BorderRadius.circular(kContainerRadius),
           color: Get.isDarkMode ? primaryGrey : Colors.white,
           boxShadow: Get.isDarkMode ? null : [
             BoxShadow(

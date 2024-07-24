@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
+/// Title is small and Text is large
 class TitleAndText extends StatelessWidget {
-  const TitleAndText({super.key, required this.title, this.text, this.details, this.crossAxisAlignment});
+  const TitleAndText({
+    super.key,
+    required this.title,
+    this.text,
+    this.details,
+    this.crossAxisAlignment
+  });
 
   final String title;
   final String? text;

@@ -1,12 +1,20 @@
+import 'package:adawat_customer_app/custom_widgets/custom_radio_button.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import '../models/bottom_sheet_item_model.dart';
 
+/// Individual item in bottom sheet
 class BottomSheetItem extends StatelessWidget {
-  const BottomSheetItem({super.key, required this.itemsList, required this.index});
+  const BottomSheetItem({
+    super.key,
+    required this.itemsList,
+    required this.index,
+    required this.chosenFilterValue
+  });
 
   final int index;
   final RxList<BottomSheetItemModel> itemsList;
+  final RxString chosenFilterValue;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +26,7 @@ class BottomSheetItem extends StatelessWidget {
           }
           itemsList[index].isSelected = true;
           itemsList.refresh();
+          chosenFilterValue.value = itemsList[index].text!;
         }
       },
       child: Row(
@@ -27,27 +36,7 @@ class BottomSheetItem extends StatelessWidget {
             itemsList[index].text!,
             style: Theme.of(context).textTheme.labelMedium,
           ),
-          AnimatedContainer(
-            height: 18,
-            width: 18,
-            duration: const Duration(milliseconds: 350),
-            padding: const EdgeInsets.all(4),
-            margin: const EdgeInsets.symmetric(vertical: 8),
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  width: 0.8,
-                  color: itemsList[index].isSelected! ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.secondary,
-                )
-            ),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 350),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: itemsList[index].isSelected! ? Theme.of(context).colorScheme.primary : Colors.transparent,
-              ),
-            ),
-          )
+          CustomRadioButton(isSelected: itemsList[index].isSelected!),
         ],
       ),
     );

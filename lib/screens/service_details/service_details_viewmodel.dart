@@ -3,7 +3,6 @@ import 'package:adawat_customer_app/screens/service_details/service_details_view
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:adawat_customer_app/helpers/languages/translations_key.dart' as lang_key;
-
 import '../../helpers/common_functions.dart';
 import '../../helpers/constants.dart';
 
@@ -15,8 +14,13 @@ class ServiceDetailsViewModel extends GetxController with GetTickerProviderState
   RxInt selectedQuantity = 1.obs;
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
-  Rx<ServiceModel> serviceDetails = ServiceModel(price: 45, serviceName: 'AC Installation', measuringUnit: 'Per Unit', serviceCategory: 'AC Services').obs;
+  Rx<ServiceModel> serviceDetails = ServiceModel().obs;
 
+  @override
+  void onInit() {
+    serviceDetails.value = Get.arguments['service'];
+    super.onInit();
+  }
 
   void showDateAndTimePicker(BuildContext context) async {
     selectedDate = await showDatePicker(
@@ -79,7 +83,7 @@ class ServiceDetailsViewModel extends GetxController with GetTickerProviderState
             }
           } else {
             if(context.mounted){
-              ServiceDetailsView.addToCartBottomSheet(context);
+              ServiceDetailsView().addToCartBottomSheet(context);
             }
           }
         }

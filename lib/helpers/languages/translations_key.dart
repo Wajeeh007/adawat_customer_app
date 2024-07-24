@@ -38,6 +38,7 @@
   /// OTP Verification
   const otpSent = 'otpSent',
     verify = 'verify',
+    verification = 'verification',
     resendCode = 'resendCode';
 
   /// Bottom Appbar
@@ -53,6 +54,9 @@
     specialOffers = 'specialOffers',
     popularServices = 'popularServices',
     categories = 'categories';
+
+  /// Categories Listing
+  const allCategories = 'allCategories';
 
   /// Service Details
   const serviceDetails = 'serviceDetails',
@@ -82,34 +86,41 @@
   const services = 'services',
     bookingDetails = 'bookingDetails';
 
-  /// Cart
-  const cart = 'cart',
-    slideToDelete = 'slideToDelete',
-    netTotal = 'netTotal';
+  /// Inbox
+  const searchChat = 'searchChat';
 
-  /// Checkout - Confirm Address
-  const location = 'location',
-    apply = 'apply',
-    servicesPrice = 'servicesPrice',
-    voucher = 'voucher',
-    total = 'total',
-    addAddress = 'addAddress',
-    promoCode = 'promoCode';
+  /// Checkout and Cart Screens
 
-  /// Checkout - Payment Method
-  const choosePaymentMethod = 'choosePaymentMethod',
-    tapToShowCost = 'tapToShowCost',
-    tapToCloseDetails = 'tapToShowDetails',
-    addCard = 'addCard';
+    /// Cart
+    const cart = 'cart',
+      netTotal = 'netTotal';
 
-  /// Checkout - Order Confirmation
-  const orderConfirmed = 'orderConfirmed';
+    /// Confirm Address
+    const location = 'location',
+      apply = 'apply',
+      servicesPrice = 'servicesPrice',
+      voucher = 'voucher',
+      total = 'total',
+      addAddress = 'addAddress',
+      additionalPhoneNumber = 'additionalPhoneNumber',
+      confirmAddress = 'confirmAddress',
+      promoCode = 'promoCode';
+
+    /// Payment Method
+    const choosePaymentMethod = 'choosePaymentMethod',
+      tapToShowCost = 'tapToShowCost',
+      tapToCloseDetails = 'tapToShowDetails',
+      completeOrder = 'completeOrder',
+      addCard = 'addCard';
+
+    /// Order Confirmation
+    const orderConfirmed = 'orderConfirmed';
 
   /// Chat
   const typeSomething = 'typeSomething';
 
   /// Settings
-  const profileSettings = 'profileSettings',
+  const personalDetails = 'profileSettings',
     aboutUs = 'aboutUs',
     support = 'support',
     addRemoveAddress = 'addRemoveAddress',
@@ -142,6 +153,24 @@
     makeDefaultAddress = 'makeDefaultAddress',
     noAddressFound = 'noAddressFound';
 
+  /// Edit Address
+  const editAddress = 'editAddress';
+
+  /// Language
+  const searchLanguage = 'searchLanguage';
+
+  /// Support
+  const liveChat = 'liveChat',
+    faq = 'faq',
+    sendEmail = 'sendEmail';
+
+  /// About Us
+  const whoAreWe = 'whoAreWe';
+
+  /// Terms & Conditions
+  const intro = 'intro',
+    howContractIsFormed = 'howContractIsFormed';
+
   /// General
   const cont = 'continue',
     date = 'date',
@@ -150,9 +179,13 @@
     no = 'no',
     text = 'text',
     phone = 'phone',
+    pickOnMap = 'pickOnMap',
+    homeWorkOffice = 'homeWorkOffice',
     label = 'label',
     searchBy = 'searchBy',
     by = 'by',
+    number = 'number',
+    countryCode = 'countryCode',
     general = 'general',
     name = 'name',
     proceed = 'proceed',
@@ -160,12 +193,18 @@
     viewAll = 'viewAll',
     sar = 'sar',
     expiry = 'expiry',
+      swipeToDelete = 'slideToDelete',
+    swipeToEdit = 'slideToEdit',
+    tapToRemoveGuider = 'tapToRemoveGuider',
     payment = 'payment',
     bookNow = 'bookNow',
     quantity = 'quantity',
     pending = 'pending',
     submit = 'submit',
     account = 'account',
+    note = 'note',
+    edit = 'edit',
+    numberAssociatedWithAddress = 'numberAssociatedWithAddress',
     register = 'register';
 
   /// Error Messages

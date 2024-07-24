@@ -3,24 +3,26 @@ import 'package:adawat_customer_app/custom_widgets/custom_textfield.dart';
 import 'package:adawat_customer_app/custom_widgets/password_visibility_icon.dart';
 import 'package:adawat_customer_app/custom_widgets/stepper_text.dart';
 import 'package:adawat_customer_app/helpers/common_functions.dart';
+import 'package:adawat_customer_app/helpers/routes.dart';
 import 'package:adawat_customer_app/screens/auth/sign_up/screen_one/screen_one_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:get/get.dart';
 import 'package:adawat_customer_app/helpers/languages/translations_key.dart' as lang_key;
+import '../../../../custom_widgets/custom_appbar.dart';
 import '../../../../helpers/constants.dart';
 
-final ScreenOneViewModel viewModel = Get.put<ScreenOneViewModel>(ScreenOneViewModel());
-
 class ScreenOneView extends StatelessWidget {
-  const ScreenOneView({super.key});
+  ScreenOneView({super.key});
+
+  final ScreenOneViewModel viewModel = Get.put<ScreenOneViewModel>(ScreenOneViewModel());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(onPressed: () => Get.back(), icon: const Icon(Icons.arrow_back_ios_new_rounded)),
+      appBar: CustomAppBar(
+        titleText: lang_key.signUp.tr,
       ),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),
@@ -56,7 +58,7 @@ class ScreenOneView extends StatelessWidget {
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value)  => CommonFunctions.validateEmail(value)
                   ),
-                  const PhoneNoTextField(),
+                  PhoneNoTextField(),
                   Obx(() => CustomTextField(
                     asterisk: true,
                     hintText: '******',
@@ -93,9 +95,10 @@ class ScreenOneView extends StatelessWidget {
                   )),
                   CustomButton(
                       onTap: () {
-                        if(viewModel.formKey.currentState!.validate()) {
-
-                        }
+                        Get.toNamed(AppRoutes.signUpScreenTwo);
+                        // if(viewModel.formKey.currentState!.validate()) {
+                        //
+                        // }
                       },
                       text: lang_key.cont.tr
                   )
@@ -111,7 +114,9 @@ class ScreenOneView extends StatelessWidget {
 
 /// Textfield for phone number. Contains two fields but one is set to be onlyRead because it is for country code
 class PhoneNoTextField extends StatelessWidget {
-  const PhoneNoTextField({super.key});
+  PhoneNoTextField({super.key});
+
+  final ScreenOneViewModel viewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {

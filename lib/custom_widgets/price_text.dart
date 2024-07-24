@@ -4,7 +4,12 @@ import 'package:adawat_customer_app/helpers/languages/translations_key.dart' as 
 import 'package:get/get.dart';
 
 class PriceText extends StatelessWidget {
-  const PriceText({super.key, required this.price, this.titleTextStyle, this.priceTextStyle});
+  const PriceText({
+    super.key,
+    required this.price,
+    this.titleTextStyle,
+    this.priceTextStyle
+  });
 
   final double price;
   final TextStyle? titleTextStyle;
@@ -15,7 +20,9 @@ class PriceText extends StatelessWidget {
     return RichText(
       text: TextSpan(
         text: price.toString(),
-        style: titleTextStyle ?? Theme.of(context).textTheme.labelLarge,
+        style: titleTextStyle ?? Theme.of(context).textTheme.labelLarge?.copyWith(
+          fontWeight: FontWeight.w600
+        ),
         children: [
           TextSpan(
             text: " ${lang_key.sar.tr}",

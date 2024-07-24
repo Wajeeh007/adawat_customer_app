@@ -1,4 +1,5 @@
 import 'package:adawat_customer_app/helpers/global_variables.dart';
+import 'package:adawat_customer_app/helpers/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,6 +16,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? bottom;
   final Widget? titleWidget;
   final bool centerTitle;
+  final VoidCallback? backBtnOnPressed;
 
   const CustomAppBar(
       {super.key,
@@ -31,6 +33,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         this.backBtn = true,
         this.bgColor,
         this.bottom,
+        this.backBtnOnPressed,
       });
 
   @override
@@ -47,7 +50,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         Stack(
           children: [
             IconButton(
-                onPressed: () {},
+                onPressed: () => Get.toNamed(AppRoutes.cart),
                 icon: const Icon(Icons.shopping_cart_outlined)
             ),
             GlobalVariables.itemsInCart.value == 0 ? const SizedBox() : Positioned(
@@ -74,7 +77,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ) : null),
       leading: backBtn == false ? null : leading ??
               IconButton(
-                onPressed: () => Get.back(),
+                onPressed: backBtnOnPressed ?? () => Get.back(),
                 icon: const Icon(Icons.arrow_back_ios),
               ),
       bottom: bottom != null ? PreferredSize(preferredSize: preferredSize, child: bottom!) : null

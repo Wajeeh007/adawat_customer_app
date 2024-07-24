@@ -7,17 +7,25 @@ class ConfirmationViewModel extends GetxController with GetTickerProviderStateMi
   late Animation<double> animationValue = CurvedAnimation(parent: animationController, curve: Curves.elasticOut);
 
   RxDouble containerHeightAndWidth = 3.0.obs;
-  RxDouble textSize = 32.0.obs;
+  RxDouble textSize = 3.0.obs;
 
   @override
   void onReady() {
     animationController.forward();
     animationController.addListener(() {
-      animationValue.value;
+      containerHeightAndWidth.value = 3 * (animationValue.value * 100);
+      textSize.value = 32 * animationValue.value;
       if(animationController.isCompleted) {
         animationController.dispose();
       }
     });
     super.onReady();
+  }
+
+  @override
+  void onClose() {
+    containerHeightAndWidth.value = 3;
+    textSize.value = 3;
+    super.onClose();
   }
 }

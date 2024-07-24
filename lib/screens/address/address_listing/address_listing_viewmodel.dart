@@ -25,9 +25,18 @@ class AddressListingViewModel extends GetxController {
 
   RxString chosenFilter = ''.obs;
 
+  RxBool showGuider = true.obs;
+
   @override
   void onReady() {
     chosenFilter.value = bottomSheetItems.first.text!;
     super.onReady();
+  }
+
+  @override
+  void onClose() {
+    showGuider.value = true;
+    searchController.dispose();
+    super.onClose();
   }
 }

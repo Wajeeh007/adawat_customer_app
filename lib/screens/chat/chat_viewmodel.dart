@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 class ChatViewModel extends GetxController {
 
   ScrollController scrollController = ScrollController();
+  TextEditingController messageController = TextEditingController();
 
   Rx<ChatModel> chat = ChatModel(
       name: 'Wajeeh',

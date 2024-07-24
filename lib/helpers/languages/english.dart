@@ -3,48 +3,50 @@ import 'translations_key.dart' as key;
 class English {
 
   Map<String, String> get translations => {
-    ///Auth Screens
-      /// Login Options Screen
 
-      key.login: 'Login',
-      key.or: 'Or',
-      key.dontHaveAccount: 'Don\'t have an account? ',
-      key.signUp: 'Sign Up',
-      key.continueWithEmail: 'Continue With Email',
+      ///Auth Screens
+        /// Login Options Screen
 
-      /// Email Login Screen
-      key.email: 'Email',
-      key.password: 'Password',
-      key.enterCredentials: 'Enter Credentials',
+        key.login: 'Login',
+        key.or: 'Or',
+        key.dontHaveAccount: 'Don\'t have an account? ',
+        key.signUp: 'Sign Up',
+        key.continueWithEmail: 'Continue With Email',
 
-      /// Sign Up - Screen One
-      key.fullName: 'Full Name',
-      key.phoneNumber: 'Phone No',
-      key.confirmPassword: 'Confirm Password',
-      key.personalInfo: 'Personal Info',
-      key.bank: 'Bank',
-      key.address: 'Address',
+        /// Email Login Screen
+        key.email: 'Email',
+        key.password: 'Password',
+        key.enterCredentials: 'Enter Credentials',
 
-      ///Sign Up - Scree Two
-      key.houseOrApartment: 'House / Apartment No:',
-      key.streetOrFloor: 'Street / Floor:',
-      key.lane: 'Lane:',
-      key.area: 'Area:',
-      key.buildingName: 'Building Name:',
-      key.nearbyLandmark: 'Nearby Landmark:',
-      key.noteForServiceman: 'Note For Serviceman:',
-      key.city: 'City',
+        /// Sign Up - Screen One
+        key.fullName: 'Full Name',
+        key.phoneNumber: 'Phone No',
+        key.confirmPassword: 'Confirm Password',
+        key.personalInfo: 'Personal Info',
+        key.bank: 'Bank',
+        key.address: 'Address',
 
-      /// Sign Up - Screen Three
-      key.cardHolderName: 'Cardholder Name:',
-      key.cardNumber: 'Card Number:',
-      key.cvcNumber: 'CVC:',
-      key.skipAndSignUp: 'Skip & Sign Up',
+        ///Sign Up - Scree Two
+        key.houseOrApartment: 'House / Apartment No',
+        key.streetOrFloor: 'Street / Floor',
+        key.lane: 'Lane',
+        key.area: 'Area',
+        key.buildingName: 'Building Name',
+        key.nearbyLandmark: 'Nearby Landmark',
+        key.noteForServiceman: 'Note For Serviceman',
+        key.city: 'City',
 
-      /// OTP Verification
-      key.otpSent: 'An OTP has been sent on your phone number for verification.',
-      key.verify: 'Verify',
-      key.resendCode: 'Resend Code',
+        /// Sign Up - Screen Three
+        key.cardHolderName: 'Cardholder Name:',
+        key.cardNumber: 'Card Number:',
+        key.cvcNumber: 'CVC:',
+        key.skipAndSignUp: 'Skip & Sign Up',
+
+        /// OTP Verification
+        key.otpSent: 'An OTP has been sent on your phone number for verification.',
+        key.verify: 'Verify',
+        key.verification: 'Verification',
+        key.resendCode: 'Resend Code',
 
       /// Bottom Appbar
       key.welcome: 'Welcome',
@@ -59,6 +61,9 @@ class English {
       key.categories: 'Categories',
       key.specialOffers: 'Special Offers',
       key.popularServices: 'Popular Services',
+
+      /// All Categories
+      key.allCategories: 'All Categories',
 
       /// Service Details
       key.serviceDetails: 'Service Details',
@@ -88,34 +93,41 @@ class English {
       key.services: 'Services',
       key.bookingDetails: 'Booking Details',
 
-      /// Cart
-      key.netTotal: 'Net Total',
-      key.cart: 'Cart',
-      key.slideToDelete: 'Slide an item to delete it',
+      /// Inbox
+      key.searchChat: 'Search Chat',
 
-      /// Checkout - Confirm Address
-      key.location: 'Location',
-      key.promoCode: 'Promo Code',
-      key.apply: 'Apply',
-      key.voucher: 'Voucher',
-      key.total: 'Total',
-      key.addAddress: 'Add Address',
-      key.servicesPrice: 'Services Price',
+      /// Checkout and Cart Screens
 
-      /// Checkout - Payment Method
-      key.choosePaymentMethod: 'Choose Payment Method',
-      key.tapToShowCost: 'Tap to show cost details',
-      key.tapToCloseDetails: 'Tap to close cost details',
-      key.addCard: 'Add Card',
+        /// Cart
+        key.netTotal: 'Net Total',
+        key.cart: 'Cart',
 
-      /// Checkout - Order Confirmation
-      key.orderConfirmed: 'Order Confirmed',
+        /// Confirm Address
+        key.location: 'Location',
+        key.promoCode: 'Promo Code',
+        key.apply: 'Apply',
+        key.voucher: 'Voucher',
+        key.total: 'Total',
+        key.additionalPhoneNumber: 'Additional Phone Number',
+        key.confirmAddress: 'Confirm Address',
+        key.addAddress: 'Add Address',
+        key.servicesPrice: 'Services Price',
+
+        /// Payment Method
+        key.choosePaymentMethod: 'Choose Payment Method',
+        key.tapToShowCost: 'Tap to show cost details',
+        key.tapToCloseDetails: 'Tap to close cost details',
+        key.addCard: 'Add Card',
+        key.completeOrder: 'Complete Order',
+
+        /// Order Confirmation
+        key.orderConfirmed: 'Order Confirmed',
 
       /// Chat
       key.typeSomething: 'Type something...',
 
       /// Settings
-      key.profileSettings: 'Profile Settings',
+      key.personalDetails: 'Personal Details',
       key.aboutUs: 'About Us',
       key.support: 'Support',
       key.addRemoveAddress: 'Add/Remove Address',
@@ -148,15 +160,37 @@ class English {
       key.noAddressFound: 'No Address Found',
       key.makeDefaultAddress: 'Make Default Address',
 
+      /// Edit Address
+      key.editAddress: 'Edit Address',
+
+      /// Language
+      key.searchLanguage: 'Search Language',
+
+      /// Support
+      key.faq: 'FAQ',
+      key.sendEmail: 'Send Email',
+      key.liveChat: 'Live Chat',
+
+      /// About Us
+      key.whoAreWe: 'Who are we?',
+
+      /// Terms & Conditions
+      key.intro: '1. Introduction',
+      key.howContractIsFormed: '2. How the contract is formed between you and Adawat?',
+
       /// General
       key.cont: 'Continue',
       key.general: 'General',
       key.checkout: 'Checkout',
       key.expiry: 'Expiry',
       key.label: 'Label',
+      key.pickOnMap: 'Pick On Map',
+      key.homeWorkOffice: 'Home, Work, Office etc',
       key.text: 'Text',
       key.phone: 'Phone',
       key.searchBy: 'Search by',
+      key.number: 'Number',
+      key.countryCode: 'Country Code',
       key.by: 'By',
       key.yes: 'Yes',
       key.no: 'No',
@@ -173,6 +207,12 @@ class English {
       key.quantity: 'Quantity',
       key.viewAll: 'View All',
       key.submit: 'Submit',
+      key.note: 'Note: ',
+      key.edit: 'Edit',
+      key.numberAssociatedWithAddress: 'This phone number shall be associated with this address and serviceman shall use this number to contact',
+      key.swipeToDelete: 'Swipe left to delete an item',
+      key.swipeToEdit: 'Swipe right to edit an item',
+      key.tapToRemoveGuider: '(Tap anywhere on the screen to remove guider)',
 
       /// Error Messages
       key.enterValidPhoneNo: 'Enter Valid Phone Number',
@@ -188,5 +228,4 @@ class English {
       key.addressLimitReached: 'You have reached the limit. Remove one to add a new address',
       key.passwordNotMatching: 'Passwords do not match',
   };
-
 }

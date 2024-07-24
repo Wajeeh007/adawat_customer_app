@@ -48,6 +48,7 @@ class BookingsListingView extends StatelessWidget {
   }
 }
 
+/// Pending bookings list
 class PendingList extends StatelessWidget {
   const PendingList({super.key});
 
@@ -66,6 +67,7 @@ class PendingList extends StatelessWidget {
   }
 }
 
+/// Completed bookings list
 class CompletedList extends StatelessWidget {
   const CompletedList({super.key});
 
@@ -83,6 +85,7 @@ class CompletedList extends StatelessWidget {
   }
 }
 
+/// Cancelled bookings list
 class CancelledList extends StatelessWidget {
   const CancelledList({super.key});
 
@@ -100,6 +103,7 @@ class CancelledList extends StatelessWidget {
   }
 }
 
+/// Booking details widget. Can be used for all types of bookings
 class BookingContainer extends StatelessWidget {
   const BookingContainer({super.key, required this.type});
 
@@ -111,7 +115,7 @@ class BookingContainer extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: primaryGrey,
+        color: Theme.of(context).colorScheme.primaryContainer,
         boxShadow: Get.isDarkMode ? null : kShadow,
         borderRadius: BorderRadius.circular(kContainerRadius),
       ),
@@ -144,21 +148,22 @@ class BookingContainer extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Get.isDarkMode ? primaryDullYellow : primaryYellow
+                            color: Theme.of(context).colorScheme.primary
                           ),
                         ),
                         Text(
                           'AC Services',
-                          style: Theme.of(context).textTheme.labelMedium,
+                          style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.secondary
+                          ),
                         ),
                         type == ContainerType.cancelled || type == ContainerType.completed ? const SizedBox() : Expanded(
                           child: Align(
                             alignment: Alignment.bottomLeft,
                             child: Container(
-                              // margin: const EdgeInsets.only(top: 11),
                               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(kContainerRadius),
+                                borderRadius: kBorderRadius,
                                 color: pendingStatusBgColor
                               ),
                               child: Text(
@@ -188,8 +193,8 @@ class BookingContainer extends StatelessWidget {
                     alignment: Alignment.center,
                     padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
                     decoration: BoxDecoration(
-                      color: primaryDullYellow,
-                      borderRadius: BorderRadius.circular(kContainerRadius),
+                      color: Theme.of(context).colorScheme.primary,
+                      borderRadius: kBorderRadius,
                     ),
                     child: Text(
                       '1 more',

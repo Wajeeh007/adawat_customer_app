@@ -1,15 +1,11 @@
 import 'package:adawat_customer_app/custom_widgets/image_avatar.dart';
 import 'package:adawat_customer_app/helpers/constants.dart';
-import 'package:adawat_customer_app/screens/banking/bank_card_listing/bank_card_listing_view.dart';
-import 'package:adawat_customer_app/screens/change_password/change_password_view.dart';
-import 'package:adawat_customer_app/screens/change_phone_number/change_phone_number_view.dart';
-import 'package:adawat_customer_app/screens/profile_settings/profile_settings_view.dart';
+import 'package:adawat_customer_app/helpers/routes.dart';
 import 'package:adawat_customer_app/screens/settings/settings_viewmodel.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:adawat_customer_app/helpers/languages/translations_key.dart' as lang_key;
-
-import '../address/address_listing/address_listing_view.dart';
 
 final SettingsViewModel viewModel = Get.put<SettingsViewModel>(SettingsViewModel());
 
@@ -29,8 +25,7 @@ class SettingsView extends StatelessWidget {
             includeShadow: false,
             includeImage: true,
             descText: 'wajeeh@gmail.com',
-            onPressed: () {},
-            suffixButton: InkWell(
+            suffixWidget: InkWell(
                 onTap: () {},
                 child: const Icon(
                   Icons.logout_rounded,
@@ -40,16 +35,53 @@ class SettingsView extends StatelessWidget {
             ),
           ),
           HeadingText(text: lang_key.account.tr),
-          SettingItem(title: lang_key.profileSettings.tr, onPressed: () => Get.to(() => const ProfileSettingsView()),),
-          SettingItem(title: lang_key.addRemoveAddress.tr, onPressed: () => Get.to(() => const AddressListingView()),),
-          SettingItem(title: lang_key.bankCards.tr, onPressed: () => Get.to(() => const BankCardListingView()),),
-          SettingItem(title: lang_key.changePassword.tr, onPressed: () => Get.to(() => const ChangePasswordView()),),
-          SettingItem(title: lang_key.changePhoneNumber.tr, onPressed: () => Get.to(() => const ChangePhoneNumberView())),
+          SettingItem(
+            title: lang_key.personalDetails.tr,
+            onPressed: () => Get.toNamed(AppRoutes.personalDetails),
+            suffixIcon: CupertinoIcons.person,
+          ),
+          SettingItem(
+            title: lang_key.addRemoveAddress.tr,
+            onPressed: () => Get.toNamed(AppRoutes.addressListing),
+            suffixIcon: Icons.location_city_rounded,
+          ),
+          SettingItem(
+            title: lang_key.bankCards.tr,
+            onPressed: () => Get.toNamed(AppRoutes.bankCardsListing),
+            suffixIcon: CupertinoIcons.creditcard,
+          ),
+          SettingItem(
+            title: lang_key.changePassword.tr,
+            onPressed: () => Get.toNamed(AppRoutes.changePassword),
+            suffixIcon: Icons.password_rounded,
+          ),
+          SettingItem(
+              title: lang_key.changePhoneNumber.tr,
+              onPressed: () => Get.toNamed(AppRoutes.changePhoneNumber),
+            suffixIcon: CupertinoIcons.phone,
+          ),
           HeadingText(text: lang_key.general.tr),
-          SettingItem(title: lang_key.language.tr, onPressed: () {},),
-          SettingItem(title: lang_key.support.tr, onPressed: () {},),
-          SettingItem(title: lang_key.aboutUs.tr, onPressed: () {},),
-          SettingItem(title: lang_key.termsAndConditions.tr, onPressed: () {},),
+          SettingItem(
+            title: lang_key.language.tr,
+            onPressed: () => Get.toNamed(AppRoutes.language),
+            suffixIcon: Icons.language_rounded,
+          ),
+          SettingItem(
+            title: lang_key.support.tr,
+            onPressed: () => Get.toNamed(AppRoutes.support),
+            suffixIcon: Icons.support_agent_rounded,
+          ),
+          SettingItem(
+            title: lang_key.aboutUs.tr,
+            onPressed: () => Get.toNamed(AppRoutes.aboutUs),
+            suffixIcon: Icons.info_outline_rounded,
+          ),
+          SettingItem(
+            title: lang_key.termsAndConditions.tr,
+            onPressed: () => Get.toNamed(AppRoutes.termsAndConditions),
+            suffixIcon: CupertinoIcons.doc,
+          ),
+          const SizedBox(height: 8,),
         ],
       ),
     );
@@ -61,7 +93,7 @@ class SettingItem extends StatelessWidget {
   const SettingItem({
     super.key,
     required this.title,
-    required this.onPressed,
+    this.onPressed,
     this.borderRadius = kContainerRadius,
     this.margin  = const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
     this.padding = const EdgeInsets.all(15),
@@ -69,7 +101,8 @@ class SettingItem extends StatelessWidget {
     this.includeButton = true,
     this.includeImage = false,
     this.descText,
-    this.suffixButton,
+    this.suffixIcon,
+    this.suffixWidget
   });
 
   final double borderRadius;
@@ -79,8 +112,9 @@ class SettingItem extends StatelessWidget {
   final bool includeButton;
   final String? descText;
   final bool includeImage;
-  final VoidCallback onPressed;
-  final Widget? suffixButton;
+  final VoidCallback? onPressed;
+  final IconData? suffixIcon;
+  final Widget? suffixWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +138,7 @@ class SettingItem extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.secondary
+                      color: Colors.grey.shade400
                   ),
                 ) : const SizedBox(),
                 Text(
@@ -120,13 +154,15 @@ class SettingItem extends StatelessWidget {
             includeButton ? Expanded(
               child: Align(
                 alignment: Alignment.centerRight,
-                child: suffixButton ?? const CircleAvatar(
-                  radius: 10,
-                  backgroundColor: darkThemeLightGrey,
-                  child: Icon(Icons.arrow_forward_ios_rounded, size: 13, color: primaryBlack,),
+                child: suffixWidget ?? (suffixIcon != null ? Icon(
+                  suffixIcon
+                ) : const CircleAvatar(
+                    radius: 10,
+                    backgroundColor: darkThemeLightGrey,
+                    child: Icon(Icons.arrow_forward_ios_rounded, size: 13, color: primaryBlack,),
+                  )),
                 ),
-              ),
-            ) : const SizedBox()
+              ) : const SizedBox(),
           ],
         ),
       ),

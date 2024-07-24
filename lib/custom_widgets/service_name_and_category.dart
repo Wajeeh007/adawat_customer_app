@@ -24,7 +24,7 @@ class ServiceNameAndCategory extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
-              color: Get.isDarkMode ? darkThemeLightGrey.withOpacity(0.5) : darkThemeLightGrey
+              color: Get.isDarkMode ? darkThemeLightGrey.withOpacity(0.5) : lightModeTextGrey
           ),
         ),
       ],

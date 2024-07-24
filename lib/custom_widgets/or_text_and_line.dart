@@ -15,7 +15,9 @@ class OrTextAndLine extends StatelessWidget {
         children: [
           Expanded(
             child: DottedLine(
-                dashColor: Theme.of(context).colorScheme.secondary
+                dashColor: Theme.of(context).colorScheme.secondary,
+              dashGapLength: 4,
+              dashLength: 6,
             ),
           ),
           Padding(
@@ -27,7 +29,9 @@ class OrTextAndLine extends StatelessWidget {
           ),
           Expanded(
             child: DottedLine(
-                dashColor: Theme.of(context).colorScheme.secondary
+                dashColor: Theme.of(context).colorScheme.secondary,
+              dashGapLength: 4,
+              dashLength: 6,
             ),
           ),
         ],

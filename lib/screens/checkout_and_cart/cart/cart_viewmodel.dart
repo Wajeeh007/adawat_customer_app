@@ -5,4 +5,10 @@ class CartViewModel extends GetxController {
   RxList<int> quantities = [1, 6, 2].obs;
   RxBool showGuider = true.obs;
 
+  @override
+  void onClose() {
+    showGuider.value = true;
+    super.onClose();
+  }
+
 }

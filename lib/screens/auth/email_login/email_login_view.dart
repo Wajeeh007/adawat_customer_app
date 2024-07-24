@@ -1,7 +1,7 @@
 import 'package:adawat_customer_app/custom_widgets/custom_button.dart';
 import 'package:adawat_customer_app/custom_widgets/custom_textfield.dart';
 import 'package:adawat_customer_app/custom_widgets/password_visibility_icon.dart';
-import 'package:adawat_customer_app/helpers/constants.dart';
+import 'package:adawat_customer_app/helpers/routes.dart';
 import 'package:adawat_customer_app/screens/auth/email_login/email_login_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
@@ -32,6 +32,7 @@ class EmailLoginView extends StatelessWidget {
               ),
               Image(image: const Svg('assets/vectors/login_vector.svg',), height: Get.height * 0.35,),
               Form(
+                key: viewModel.formKey,
                 child: Column(
                   children: [
                     CustomTextField(
@@ -50,7 +51,10 @@ class EmailLoginView extends StatelessWidget {
                       suffixIcon: PasswordVisibilityIcon(visibility: viewModel.obscurePassword)
                     ),
                     ),
-                    CustomButton(onTap: () {}, text: lang_key.login.tr, textColor: primaryBlack,)
+                    CustomButton(
+                      onTap: () => Get.offAllNamed(AppRoutes.bottomBar),
+                      text: lang_key.login.tr,
+                    )
                   ],
                 ),
               ),

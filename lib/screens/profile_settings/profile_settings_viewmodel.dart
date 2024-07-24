@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-class ProfileSettingsViewModel extends GetxController {
+class PersonalDetailsViewModel extends GetxController {
 
   /// Controllers and Global Key
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  GlobalKey formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void onClose() {

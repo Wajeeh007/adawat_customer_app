@@ -8,7 +8,7 @@ class CustomButton extends StatelessWidget {
     required this.onTap,
     this.text,
     this.color,
-    this.textColor = primaryBlack,
+    this.textColor,
     this.width = double.infinity,
     this.textStyle,
     this.height = 55,
@@ -37,7 +37,7 @@ class CustomButton extends StatelessWidget {
       height: height,
       width: width,
       decoration: BoxDecoration(
-        color: color ?? (Get.isDarkMode ? primaryDullYellow : primaryYellow),
+        color: color ?? Theme.of(context).colorScheme.primary,
         borderRadius: BorderRadius.circular(borderRadius),
         border: borderStyle,
       ),
@@ -49,7 +49,7 @@ class CustomButton extends StatelessWidget {
               text!,
               style: textStyle ?? Theme.of(context).textTheme.labelLarge?.copyWith(
                 fontWeight: FontWeight.w600,
-                color: textColor
+                color: textColor ?? (Get.isDarkMode ? backgroundWhite : primaryBlack)
               ),
             ),
         ),

@@ -1,11 +1,14 @@
 import 'package:adawat_customer_app/custom_widgets/custom_appbar.dart';
 import 'package:adawat_customer_app/custom_widgets/custom_button.dart';
 import 'package:adawat_customer_app/custom_widgets/custom_textfield.dart';
+import 'package:adawat_customer_app/custom_widgets/password_visibility_icon.dart';
 import 'package:adawat_customer_app/helpers/common_functions.dart';
 import 'package:adawat_customer_app/screens/change_password/change_password_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:adawat_customer_app/helpers/languages/translations_key.dart' as lang_key;
+
+import '../../helpers/constants.dart';
 
 final ChangePasswordViewModel viewModel = Get.put<ChangePasswordViewModel>(ChangePasswordViewModel());
 
@@ -23,7 +26,10 @@ class ChangePasswordView extends StatelessWidget {
           return SingleChildScrollView(
             padding: const EdgeInsets.all(15),
             child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: constraints.maxHeight - 20, minWidth: constraints.maxWidth),
+              constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight - constraintSubtractValue,
+                  minWidth: constraints.maxWidth
+              ),
               child: IntrinsicHeight(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -60,12 +66,7 @@ class ChangePasswordView extends StatelessWidget {
                                 obscureText: viewModel.newPassVisibility.value,
                                 asterisk: true,
                                 hintText: '******',
-                                suffixIcon: IconButton(
-                                    onPressed: () => viewModel.newPassVisibility.value = !viewModel.newPassVisibility.value,
-                                    icon: Icon(
-                                      viewModel.newPassVisibility.value ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-                                    )
-                                ),
+                                suffixIcon: PasswordVisibilityIcon(visibility: viewModel.newPassVisibility)
                               ),
                               CustomTextField(
                                 controller: viewModel.confirmPassController,
@@ -87,12 +88,7 @@ class ChangePasswordView extends StatelessWidget {
                                 asterisk: true,
                                 obscureText: viewModel.confirmPassVisibility.value,
                                 hintText: '******',
-                                suffixIcon: IconButton(
-                                    onPressed: () => viewModel.confirmPassVisibility.value = !viewModel.confirmPassVisibility.value,
-                                    icon: Icon(
-                                      viewModel.confirmPassVisibility.value ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-                                    )
-                                ),
+                                suffixIcon: PasswordVisibilityIcon(visibility: viewModel.confirmPassVisibility)
                               )
                             ],
                           ),

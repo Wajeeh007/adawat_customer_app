@@ -29,18 +29,26 @@ class BottomAppbarView extends StatelessWidget {
             includeCart: GlobalVariables.selectedIndex.value <= 1 ? true : false,
             backBtn: GlobalVariables.selectedIndex.value == 0 ? false : true,
             height: GlobalVariables.selectedIndex.value == 0 ? 105 : 55,
+            backBtnOnPressed: () {
+              viewModel.bottomNavBarController.animateToPage(
+                  0,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOutCubicEmphasized
+              );
+              GlobalVariables.selectedIndex.value = 0;
+            },
             titleText: viewModel.appbarTitle(GlobalVariables.selectedIndex.value),
             bottom: GlobalVariables.selectedIndex.value == 0 ? const HomePageBottomWidget() : const SizedBox(),
           ),
           body: PageView(
             onPageChanged: (value) => GlobalVariables.selectedIndex.value = value,
             controller: viewModel.bottomNavBarController,
-            children: const [
-              HomeView(),
-              BookingsListingView(),
+            children: [
+              const HomeView(),
+              const BookingsListingView(),
               InboxView(),
-              NotificationsView(),
-              SettingsView()
+              const NotificationsView(),
+              const SettingsView()
             ],
           ),
           bottomNavigationBar: BottomAppBar(

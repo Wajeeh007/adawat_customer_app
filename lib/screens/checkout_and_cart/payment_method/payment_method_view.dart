@@ -1,5 +1,6 @@
 import 'package:adawat_customer_app/custom_widgets/custom_appbar.dart';
 import 'package:adawat_customer_app/custom_widgets/custom_text_button.dart';
+import 'package:adawat_customer_app/helpers/routes.dart';
 import 'package:adawat_customer_app/screens/checkout_and_cart/payment_method/card_extended_model.dart';
 import 'package:adawat_customer_app/screens/checkout_and_cart/payment_method/payment_method_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +14,10 @@ import '../../../custom_widgets/price_text.dart';
 import '../../../custom_widgets/stepper_text.dart';
 import '../../../helpers/constants.dart';
 
-final PaymentMethodViewModel viewModel = Get.put<PaymentMethodViewModel>(PaymentMethodViewModel());
-
 class PaymentMethodView extends StatelessWidget {
-  const PaymentMethodView({super.key});
+  PaymentMethodView({super.key});
+
+  final PaymentMethodViewModel viewModel = Get.put<PaymentMethodViewModel>(PaymentMethodViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,10 @@ class PaymentMethodView extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             children: [
               ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight, minWidth: constraints.maxWidth),
+                constraints: BoxConstraints(
+                    minHeight: constraints.maxHeight,
+                    minWidth: constraints.maxWidth
+                ),
                 child: IntrinsicHeight(
                   child: SingleChildScrollView(
                     child: Column(
@@ -44,19 +48,21 @@ class PaymentMethodView extends StatelessWidget {
                               lang_key.payment.tr
                             ]),
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
+                          padding: const EdgeInsets.all(15),
                           child: Text(
                             lang_key.choosePaymentMethod.tr,
-                            style: Theme.of(context).textTheme.labelMedium,
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              fontWeight: FontWeight.w400
+                            ),
                           ),
                         ),
-                        const ChooseCard(),
+                        ChooseCard(),
                       ],
                     ),
                   ),
                 ),
               ),
-              const BottomBar()
+              BottomBar()
             ],
           );
         }
@@ -67,7 +73,9 @@ class PaymentMethodView extends StatelessWidget {
 
 /// Choose Card from list
 class ChooseCard extends StatelessWidget {
-  const ChooseCard({super.key});
+  ChooseCard({super.key});
+
+  final PaymentMethodViewModel viewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -80,18 +88,18 @@ class ChooseCard extends StatelessWidget {
           if(index == viewModel.cardsList.length) {
             return Column(
               children: [
-                Padding(
+                if(viewModel.cardsList.length < 5) Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Align(
                     alignment: Alignment.centerRight,
                       child: CustomTextButton(
-                          onTap: () {},
+                          onTap: () => Get.toNamed(AppRoutes.addBankCard),
                           text: lang_key.addCard.tr
                       ),
                   ),
                 ),
                 const OrTextAndLine(),
-                const CashOnDeliveryContainer(),
+                CashOnDeliveryContainer(),
               ],
             );
           }
@@ -112,14 +120,11 @@ class CardDetailsContainer extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.only(bottom: 8),
+      margin: const EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
-          boxShadow: Get.isDarkMode ? [] : kShadow,
+        borderRadius: kBorderRadius,
+          boxShadow: Get.isDarkMode ? null : kShadow,
           color: card.isSelected! ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.primaryContainer,
-          border: card.isSelected! ? null : Get.isDarkMode ? null : Border.all(
-              color: Theme.of(context).colorScheme.secondary,
-              width: 0.3
-          )
       ),
       child: Row(
         children: [
@@ -155,7 +160,9 @@ class CardDetailsContainer extends StatelessWidget {
 
 /// Cost and prices details at the bottom
 class BottomBar extends StatelessWidget {
-  const BottomBar({super.key});
+  BottomBar({super.key});
+
+  final PaymentMethodViewModel viewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -190,10 +197,10 @@ class BottomBar extends StatelessWidget {
             ),
             Visibility(
               visible: viewModel.showPricing.value,
-              child: const Column(
+              child: Column(
                 children: [
                   PromoCodeField(),
-                  CostSection(),
+                  const CostSection(),
                 ],
               ),
             ),
@@ -201,8 +208,8 @@ class BottomBar extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: CustomButton(
-                    onTap: () {},
-                    text: 'Order',
+                    onTap: () => Get.offNamedUntil(AppRoutes.orderConfirmation, (route) => route.isFirst),
+                    text: lang_key.completeOrder.tr,
                     margin: EdgeInsets.zero,
                     height: 45,
                   ),
@@ -217,21 +224,19 @@ class BottomBar extends StatelessWidget {
 
 /// Widget for choosing cash on service completion
 class CashOnDeliveryContainer extends StatelessWidget {
-  const CashOnDeliveryContainer({super.key});
+  CashOnDeliveryContainer({super.key});
+
+  final PaymentMethodViewModel viewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Obx(() => Container(
       alignment: Alignment.center,
-      margin: const EdgeInsets.symmetric(horizontal: 10),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-          boxShadow: Get.isDarkMode ? null : kShadow,
+          boxShadow: Get.isDarkMode ? [] : kShadow,
           color: viewModel.isCashSelected.value ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.primaryContainer,
-          border: viewModel.isCashSelected.value ? null : Get.isDarkMode ? null : Border.all(
-              color: darkThemeLightGrey,
-              width: 0.5
-          )
+          borderRadius: kBorderRadius
       ),
       child: Row(
         children: [
@@ -281,7 +286,9 @@ class DetailsTitleAndText extends StatelessWidget {
 
 /// TextField for Promo Code
 class PromoCodeField extends StatelessWidget {
-  const PromoCodeField({super.key});
+  PromoCodeField({super.key});
+
+  final PaymentMethodViewModel viewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {

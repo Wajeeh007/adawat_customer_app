@@ -1,9 +1,9 @@
 import 'package:adawat_customer_app/bindings/init_binding.dart';
 import 'package:adawat_customer_app/helpers/app_languages.dart';
-import 'package:adawat_customer_app/screens/address/address_listing/address_listing_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'helpers/routes.dart';
 import 'helpers/theme_helpers.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
       title: 'Adawat Service App',
       theme: ThemeHelpers.lightTheme,
       darkTheme: ThemeHelpers.darkTheme,
-      home: const AddressListingView(),
       themeMode: ThemeMode.system,
       textDirection: TextDirection.ltr,
       translations: AppLanguages(),
@@ -38,7 +37,8 @@ class MyApp extends StatelessWidget {
       locale: getLocale(initLanguageController.languageKey.value),
       fallbackLocale: const Locale('en', 'US'),
       initialBinding: InitBinding(),
-      // getPages: AppRoutes.pages,
+      getPages: AppRoutes.pages,
+      initialRoute: AppRoutes.initRoute,
     );
   }
 

@@ -1,8 +1,3 @@
-import 'package:adawat_customer_app/screens/bookings_listing/bookings_listing_view.dart';
-import 'package:adawat_customer_app/screens/home/home_view.dart';
-import 'package:adawat_customer_app/screens/inbox/inbox_view.dart';
-import 'package:adawat_customer_app/screens/notifications/notifications_view.dart';
-import 'package:adawat_customer_app/screens/settings/settings_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,22 +23,4 @@ class BottomAppbarViewModel extends GetxController {
         return '';
     }
   }
-
-  Widget selectView(int index) {
-    switch (index) {
-      case 0:
-        return const HomeView();
-      case 1:
-        return const BookingsListingView();
-      case 2:
-        return const InboxView();
-      case 3:
-        return const NotificationsView();
-      case 4:
-        return const SettingsView();
-      default:
-        return const SizedBox();
-    }
-  }
-
 }

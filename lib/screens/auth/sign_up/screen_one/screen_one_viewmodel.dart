@@ -23,4 +23,14 @@ class ScreenOneViewModel extends GetxController {
       return null;
     }
   }
+
+  disposeVariables() {
+    nameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    obscurePassword.value = true;
+    obscureConfirmPassword.value = true;
+  }
 }

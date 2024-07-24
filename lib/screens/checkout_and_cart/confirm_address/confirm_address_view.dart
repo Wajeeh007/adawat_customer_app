@@ -3,6 +3,7 @@ import 'package:adawat_customer_app/custom_widgets/custom_textfield.dart';
 import 'package:adawat_customer_app/custom_widgets/location_container.dart';
 import 'package:adawat_customer_app/custom_widgets/stepper_text.dart';
 import 'package:adawat_customer_app/helpers/constants.dart';
+import 'package:adawat_customer_app/helpers/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:adawat_customer_app/helpers/languages/translations_key.dart' as lang_key;
@@ -10,10 +11,10 @@ import '../../../custom_widgets/custom_button.dart';
 import '../../../models/address.dart';
 import 'confirm_address_viewmodel.dart';
 
-final CheckoutViewModel viewModel = Get.put<CheckoutViewModel>(CheckoutViewModel());
+class ConfirmAddressView extends StatelessWidget {
+  ConfirmAddressView({super.key});
 
-class CheckoutView extends StatelessWidget {
-  const CheckoutView({super.key});
+  final ConfirmAddressViewModel viewModel = Get.put<ConfirmAddressViewModel>(ConfirmAddressViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -27,24 +28,28 @@ class CheckoutView extends StatelessWidget {
           return SingleChildScrollView(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight - 20, minWidth: constraints.maxWidth),
+                constraints: BoxConstraints(
+                    minHeight: constraints.maxHeight - constraintSubtractValue,
+                    minWidth: constraints.maxWidth
+                ),
                 child: IntrinsicHeight(
                   child: Column(
                       children: [
                         StepperText(
                             index: 1, texts: [lang_key.cart.tr, lang_key.address.tr, lang_key.payment.tr]),
-                        const ChosenAddressDetails(),
-                        const CustomTextField(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
+                        ChosenAddressDetails(),
+                        CustomTextField(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
                           keyboardType: TextInputType.number,
-                          title: 'Additional Phone Number:',
+                          title: lang_key.additionalPhoneNumber.tr,
                           hintText: '+966123456789',
+                          controller: viewModel.additionalNumberController,
                         ),
                         Expanded(
                           child: Align(
                             alignment: Alignment.bottomCenter,
                             child: CustomButton(
-                              onTap: () {},
+                              onTap: () => Get.toNamed(AppRoutes.paymentMethod),
                               text: lang_key.proceed.tr,
                               textColor: backgroundWhite,
                               margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -64,7 +69,9 @@ class CheckoutView extends StatelessWidget {
 
 /// Address details like name, phone, text address, map location and other addresses to choose from
 class ChosenAddressDetails extends StatelessWidget {
-  const ChosenAddressDetails({super.key});
+  ChosenAddressDetails({super.key});
+
+  final ConfirmAddressViewModel viewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +79,12 @@ class ChosenAddressDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
           child: Text(
-            lang_key.address.tr,
-            style: Theme.of(context).textTheme.labelMedium,
+            lang_key.confirmAddress.tr,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              fontWeight: FontWeight.w400
+            ),
           ),
         ),
         Padding(

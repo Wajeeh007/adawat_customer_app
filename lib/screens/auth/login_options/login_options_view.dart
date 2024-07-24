@@ -1,3 +1,4 @@
+import 'package:adawat_customer_app/custom_widgets/custom_button.dart';
 import 'package:adawat_customer_app/helpers/constants.dart';
 import 'package:adawat_customer_app/helpers/routes.dart';
 import 'package:flutter/material.dart';
@@ -30,11 +31,18 @@ class LoginOptionsView extends StatelessWidget {
                       lang_key.login.tr,
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      child: Image(image: const Svg('assets/vectors/login_options_vector.svg',), height: Get.height * 0.25,),
+                    Obx(() => Visibility(
+                      visible: viewModel.makeVisible.value,
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 20.0),
+                          child: Image(image: Svg('assets/vectors/login_options_vector.svg')),
+                        ),
+                      ),
                     ),
-                    const ContinueWithEmail(),
+                    Obx(() => Visibility(
+                        visible: viewModel.makeVisible.value,
+                          child: const ContinueWithEmail()),
+                    ),
                     const OrTextAndLine(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -76,43 +84,40 @@ class LoginOptionsView extends StatelessWidget {
   }
 }
 
+/// Button for routing to email credentials screen
 class ContinueWithEmail extends StatelessWidget {
   const ContinueWithEmail({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return CustomButton(
       width: Get.width * 0.8,
-      height: 50,
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-        border: Border.all(
-            color: Get.isDarkMode ? darkThemeLightGrey : primaryBlack,
-            width: 2.5
-        ),
-        borderRadius: BorderRadius.circular(15),
+      color: Colors.transparent,
+      onTap: () => Get.toNamed(AppRoutes.loginWithEmail),
+      borderStyle: Border.all(
+          color: Get.isDarkMode ? darkThemeLightGrey : primaryBlack,
+          width: 1.5
       ),
-      child: InkWell(
-        onTap: () => Get.toNamed(AppRoutes.loginWithEmail),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(
-              Icons.email_outlined,
-              size: 25,
-            ),
-            const SizedBox(width: 10,),
-            Text(
-              lang_key.continueWithEmail.tr,
-              style: Theme.of(context).textTheme.labelLarge,
-            )
-          ],
-        ),
-      ),
+      textColor: Get.isDarkMode ? darkThemeLightGrey : primaryBlack,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.email_outlined,
+                size: 25,
+              ),
+              const SizedBox(width: 10,),
+              Text(
+                lang_key.continueWithEmail.tr,
+                style: Theme.of(context).textTheme.labelLarge,
+              )
+            ],
+          ),
     );
   }
 }
 
+/// Button for adding social auth
 class SocialAccButton extends StatelessWidget {
   const SocialAccButton({super.key, required this.platformName, required this.onPressed});
 

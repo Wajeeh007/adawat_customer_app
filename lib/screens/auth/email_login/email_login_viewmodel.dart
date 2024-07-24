@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 class EmailLoginViewModel extends GetxController {
 
-  /// GlobalKey(s) & Controllers
+  /// Global Key(s) & Controllers
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -21,6 +21,7 @@ class EmailLoginViewModel extends GetxController {
   disposeControllers() {
     emailController.dispose();
     passwordController.dispose();
+    obscurePassword.value = true;
   }
 
 }

@@ -1,13 +1,17 @@
+import 'package:adawat_customer_app/custom_widgets/category_item_with_image.dart';
+import 'package:adawat_customer_app/custom_widgets/custom_network_image.dart';
 import 'package:adawat_customer_app/custom_widgets/custom_text_button.dart';
 import 'package:adawat_customer_app/custom_widgets/service_item.dart';
 import 'package:adawat_customer_app/helpers/constants.dart';
 import 'package:adawat_customer_app/helpers/languages/translations_key.dart' as lang_key;
+import 'package:adawat_customer_app/helpers/routes.dart';
 import 'package:adawat_customer_app/models/service_category.dart';
 import 'package:adawat_customer_app/models/service.dart';
 import 'package:adawat_customer_app/screens/home/home_viewmodel.dart';
 import 'package:adawat_customer_app/screens/home/special_offers_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 
 final HomeViewModel viewModel = Get.put<HomeViewModel>(HomeViewModel());
 
@@ -45,83 +49,76 @@ class ServiceCategoriesSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Obx(() => viewModel.fetchingCategories.isTrue ? const Center(
-        child: CircularProgressIndicator(
-          strokeWidth: 4,
-        ),
+      child: Obx(() => viewModel.fetchingCategories.isTrue ? Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: List.generate(4, (index) {
+          return const CategoryItemShimmer();
+        }),
       ) : viewModel.serviceCategoriesList.isNotEmpty ? Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SectionHeadingAndButton(heading: lang_key.categories.tr, onTap: () {}),
-          SizedBox(
-            height: 100,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: 6,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-
-                ServiceCategory item = viewModel.serviceCategoriesList[index];
-
-                return CategoryListItem(item: item);
-              },
+          SectionHeadingAndButton(heading: lang_key.categories.tr, onTap: () => Get.toNamed(AppRoutes.categoriesListing)),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+                children: List.generate(6, (index) {
+                  ServiceCategory item = viewModel.serviceCategoriesList[index];
+                  return CategoryItemWithImage(item: item);
+                })
             ),
           ),
         ],
       ) : Center(
         child: Text(
           lang_key.noCategoriesFound.tr,
-          style: Theme.of(context).textTheme.labelLarge,
+          style: Theme
+              .of(context)
+              .textTheme
+              .labelLarge,
         ),
       )),
     );
   }
 }
 
-/// Category List item widget
-class CategoryListItem extends StatelessWidget {
-  const CategoryListItem({super.key, required this.item});
-
-  final ServiceCategory item;
+/// Loading Shimmer container for category item
+class CategoryItemShimmer extends StatelessWidget {
+  const CategoryItemShimmer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: Column(
-        children: [
-          Container(
-            // duration: const Duration(milliseconds: 250),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Shimmer.fromColors(
+          baseColor: Theme.of(context).colorScheme.tertiaryContainer,
+          highlightColor: Theme.of(context).colorScheme.tertiaryFixedDim,
+          child: Container(
+            height: 70,
+              width: 70,
               margin: const EdgeInsets.symmetric(horizontal: 5),
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                border: Border.all(
-                    color: Colors.transparent,
-                    width: 1.2
-                ),
+                color: Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(kContainerRadius),
-                color: Colors.transparent,
               ),
-              child: const SizedBox(width: 45, height: 45, child: Placeholder(),)
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: SizedBox(
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Shimmer.fromColors(
+            baseColor: Theme.of(context).colorScheme.tertiaryContainer,
+            highlightColor: Theme.of(context).colorScheme.tertiaryFixedDim,
+            child: Container(
               width: 65,
-              child: Text(
-                item.name!,
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  fontSize: 11,
-                ),
-                overflow: TextOverflow.ellipsis,
+              height: 20,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.3),
+                borderRadius: kBorderRadius
               ),
-            ),
+              ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -134,14 +131,10 @@ class OffersSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Obx(() => viewModel.fetchingOffers.isTrue ? const Center(
-        child: CircularProgressIndicator(
-          strokeWidth: 4,
-        ),
-      ) : viewModel.specialOffersList.isNotEmpty ? Column(
+      child: Obx(() => viewModel.fetchingOffers.isTrue ? const OfferShimmerContainer() : viewModel.specialOffersList.isNotEmpty ? Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SectionHeadingAndButton(heading: lang_key.specialOffers.tr, onTap: () {}),
+          SectionHeadingAndButton(heading: lang_key.specialOffers.tr),
           SizedBox(
             height: Get.height * 0.22,
             child: PageView.builder(
@@ -165,6 +158,28 @@ class OffersSlider extends StatelessWidget {
   }
 }
 
+/// Shimmer container for offer container
+class OfferShimmerContainer extends StatelessWidget {
+  const OfferShimmerContainer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+        baseColor: Theme.of(context).colorScheme.tertiaryContainer,
+      highlightColor: Theme.of(context).colorScheme.tertiaryFixedDim,
+        child: Container(
+          margin: const EdgeInsets.symmetric(vertical: 25),
+          height: Get.height * 0.22,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.4),
+            borderRadius: kBorderRadius
+          ),
+        ),
+    );
+  }
+}
+
 /// Offers Images container widget
 class OfferContainer extends StatelessWidget {
   const OfferContainer({super.key, required this.offer});
@@ -178,7 +193,11 @@ class OfferContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(kContainerRadius),
         border: Border.all(color: Colors.transparent)
       ),
-      child: const Placeholder(), // TODO: Implement Cached Network Image,
+      child: const CustomNetworkImage(
+          height: double.infinity,
+          width: double.infinity,
+        placeholderImagePath: 'assets/vectors/offer_example_image.png',
+      ),
     );
   }
 }
@@ -191,14 +210,12 @@ class PopularServicesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Obx(() => viewModel.fetchingPopularServices.isTrue ? const Center(
-        child: CircularProgressIndicator(
-          strokeWidth: 4,
-        ),
+      child: Obx(() => viewModel.fetchingPopularServices.isTrue ? Column(
+        children: List.generate(3, (index) => const ShimmerServiceItem()),
       ) : viewModel.popularServicesList.isNotEmpty ? Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SectionHeadingAndButton(heading: lang_key.popularServices.tr, onTap: () {}),
+          SectionHeadingAndButton(heading: lang_key.popularServices.tr, onTap: () => Get.toNamed(AppRoutes.popularServices)),
           ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -218,10 +235,10 @@ class PopularServicesList extends StatelessWidget {
 
 /// Section Heading Text And View All button widget
 class SectionHeadingAndButton extends StatelessWidget {
-  const SectionHeadingAndButton({super.key, required this.heading, required this.onTap});
+  const SectionHeadingAndButton({super.key, required this.heading, this.onTap});
 
   final String heading;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -234,7 +251,7 @@ class SectionHeadingAndButton extends StatelessWidget {
             heading,
             style: Theme.of(context).textTheme.bodyLarge,
           ),
-          CustomTextButton(onTap: onTap, text: lang_key.viewAll.tr)
+          onTap == null ? const SizedBox() : CustomTextButton(onTap: onTap!, text: lang_key.viewAll.tr)
         ],
       ),
     );

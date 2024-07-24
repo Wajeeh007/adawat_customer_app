@@ -46,24 +46,26 @@ class CategoryServicesListViewModel extends GetxController {
       fetchingCategories.value = false;
       fetchingServices.value = false;
     });
-    for (var element in categoriesList) {
-      if(element.name == selectedCategory) {
-        element.selected = true;
-      } else {
-        element.selected = false;
-      }
-      
-      if(element == categoriesList.last) {
-        if(selectedCategory == 'All') {
-          visibleServicesList.addAll(allServicesList);
-          visibleServicesList.refresh();
+    if(selectedCategory != 'All'){
+      for (var element in categoriesList) {
+        if (element.name == selectedCategory) {
+          element.selected = true;
         } else {
-          visibleServicesList.addAll(allServicesList.where((element) => element.serviceCategory == selectedCategory));
-          visibleServicesList.refresh();
+          element.selected = false;
+        }
+
+        if (element == categoriesList.last) {
+            visibleServicesList.addAll(allServicesList.where(
+                (element) => element.serviceCategory == selectedCategory));
+            visibleServicesList.refresh();
         }
       }
+    } else {
+      int index = categoriesList.indexWhere((element) => element.name == 'All');
+      categoriesList[index].selected = true;
+        visibleServicesList.addAll(allServicesList);
+        visibleServicesList.refresh();
     }
     super.onReady();
   }
-
 }

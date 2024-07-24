@@ -1,28 +1,31 @@
 import 'package:adawat_customer_app/custom_widgets/custom_appbar.dart';
 import 'package:adawat_customer_app/custom_widgets/custom_button.dart';
+import 'package:adawat_customer_app/custom_widgets/guider.dart';
 import 'package:adawat_customer_app/custom_widgets/service_name_and_category.dart';
+import 'package:adawat_customer_app/helpers/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
 import 'package:adawat_customer_app/helpers/languages/translations_key.dart' as lang_key;
-import 'package:shimmer/shimmer.dart';
+import '../../../custom_widgets/guider_arrow_and_text.dart';
+import '../../../custom_widgets/price_text.dart';
 import '../../../custom_widgets/stepper_text.dart';
 import '../../../helpers/constants.dart';
 import 'cart_item_model.dart';
 import 'cart_viewmodel.dart';
 
-final CartViewModel viewModel = Get.find();
-
 class CartView extends StatelessWidget {
-  const CartView({super.key});
+  CartView({super.key});
+
+  final CartViewModel viewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Scaffold(
-          bottomNavigationBar: const BottomBar(),
+          bottomNavigationBar: BottomBar(),
           appBar: CustomAppBar(
             backBtn: true,
             titleText: lang_key.cart.tr,
@@ -43,7 +46,15 @@ class CartView extends StatelessWidget {
             ),
           )
         ),
-        const Guider()
+        Guider(
+            guiderBool: viewModel.showGuider,
+          children: [
+            GuiderArrowAndText(
+              text: lang_key.swipeToDelete.tr,
+              arrowIcon: Icons.arrow_back_ios_new_rounded,
+            ),
+          ],
+        )
       ],
     );
   }
@@ -77,11 +88,7 @@ class CartItem extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 15),
           height: containerAndPicHeight,
           decoration: BoxDecoration(
-              border: Border.all(
-                  color: Theme.of(context).colorScheme.secondary,
-                  width: 0.5
-              ),
-            color: Theme.of(context).colorScheme.primaryContainer,
+            color: Theme.of(context).colorScheme.onPrimaryFixedVariant.withOpacity(0.5),
             borderRadius: kBorderRadius,
           ),
           child: Row(
@@ -149,21 +156,23 @@ class CartItem extends StatelessWidget {
 
 /// Button for incrementing and decrementing quantities of service
 class QuantityButtons extends StatelessWidget {
-  const QuantityButtons({super.key, required this.isAddBtn, required this.service});
+  QuantityButtons({super.key, required this.isAddBtn, required this.service});
 
   final bool isAddBtn;
   final CartItemModel service;
-  
+
+  final CartViewModel viewModel = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(3),
       margin: const EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
-        color: isAddBtn ? Get.isDarkMode ? primaryDullYellow : primaryYellow : Colors.transparent,
+        color: isAddBtn ? Theme.of(context).colorScheme.primary : Colors.transparent,
         borderRadius: BorderRadius.circular(8),
         border: isAddBtn ? null : Border.all(
-          color: Get.isDarkMode ? darkThemeLightGrey : primaryGrey,
+          color: darkThemeLightGrey,
         )
       ),
       child: InkWell(
@@ -187,11 +196,14 @@ class QuantityButtons extends StatelessWidget {
 
 /// Bottom Appbar for showing cost
 class BottomBar extends StatelessWidget {
-  const BottomBar({super.key});
+  BottomBar({super.key});
+
+  final CartViewModel viewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
+      color: Theme.of(context).colorScheme.primaryContainer,
       elevation: 15,
       shadowColor: darkThemeLightGrey,
       child: Padding(
@@ -208,77 +220,25 @@ class BottomBar extends StatelessWidget {
                   lang_key.netTotal.tr,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
-                Text(
-                  '300 ${lang_key.sar.tr}',
-                  style: Theme.of(context).textTheme.bodySmall,
+                PriceText(
+                  price: 300,
+                  priceTextStyle: Theme.of(context).textTheme.bodySmall,
                 )
               ],
             ),
             const SizedBox(width: 20,),
             Expanded(
                 child: CustomButton(
-                  onTap: () {},
-                  text: lang_key.checkout.tr,
+                  onTap: () => Get.toNamed(AppRoutes.confirmAddress),
+                  text: lang_key.proceed.tr,
                   height: 45,
+                  textColor: backgroundWhite,
                   margin: EdgeInsets.zero,
-                  color: Get.isDarkMode ? primaryDullYellow : primaryYellow,
                 ),
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-/// Guiding text for first time
-class Guider extends StatelessWidget {
-  const Guider({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(() => viewModel.showGuider.value ? GestureDetector(
-      onTap: () => viewModel.showGuider.value = false,
-      child: Container(
-        padding: const EdgeInsets.only(bottom: 50),
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [primaryBlack.withOpacity(0.3), primaryBlack.withOpacity(0.9)]
-          )
-        ),
-        // color: primaryBlack.withOpacity(0.3),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Shimmer.fromColors(
-                period: const Duration(milliseconds: 750),
-                  direction: ShimmerDirection.rtl,
-                  baseColor: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
-                  highlightColor: Get.isDarkMode ? darkModeShimmerHighGrey : lightModeShimmerHighGrey,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(6, (index) {
-                        return const Icon(Icons.arrow_back_ios_rounded, size: 45);
-                      }),
-                    ),
-                  )
-              ),
-              Text(
-                lang_key.slideToDelete.tr,
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: backgroundWhite
-                ),
-              )
-            ],
-          ),
-      ),
-    ) : const SizedBox(),
     );
   }
 }

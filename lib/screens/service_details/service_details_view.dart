@@ -1,5 +1,6 @@
 import 'package:adawat_customer_app/custom_widgets/custom_appbar.dart';
 import 'package:adawat_customer_app/custom_widgets/custom_button.dart';
+import 'package:adawat_customer_app/custom_widgets/price_text.dart';
 import 'package:adawat_customer_app/helpers/constants.dart';
 import 'package:adawat_customer_app/screens/service_details/service_details_viewmodel.dart';
 import 'package:dotted_line/dotted_line.dart';
@@ -10,10 +11,10 @@ import 'package:adawat_customer_app/helpers/languages/translations_key.dart' as 
 
 import '../../custom_widgets/title_and_text.dart';
 
-final ServiceDetailsViewModel viewModel = Get.put(ServiceDetailsViewModel());
-
 class ServiceDetailsView extends StatelessWidget {
-  const ServiceDetailsView({super.key});
+  ServiceDetailsView({super.key});
+
+  final ServiceDetailsViewModel viewModel = Get.put(ServiceDetailsViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -39,20 +40,20 @@ class ServiceDetailsView extends StatelessWidget {
                         fit: BoxFit.fitWidth,
                       ),
                   ),
-                  const DetailsTopContainer(),
+                  DetailsTopContainer(),
                 ]
               ),
             ),
-            const DetailsMiddleContainer(),
-            const DetailsBottomContainer(),
-            const DescAndRevContainers()
+            DetailsMiddleContainer(),
+            DetailsBottomContainer(),
+            DescAndRevContainers()
           ],
         ),
       ),
     );
   }
 
-  static Future addToCartBottomSheet(BuildContext context) {
+  Future addToCartBottomSheet(BuildContext context) {
     return showModalBottomSheet(context: context, builder: (context) {
       return Container(
         decoration: BoxDecoration(
@@ -173,7 +174,9 @@ class ServiceDetailsView extends StatelessWidget {
 
 /// Service details screen top details container widget
 class DetailsTopContainer extends StatelessWidget {
-  const DetailsTopContainer({super.key});
+  DetailsTopContainer({super.key});
+
+  final ServiceDetailsViewModel viewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -184,8 +187,8 @@ class DetailsTopContainer extends StatelessWidget {
         height: Get.height * 0.23,
         width: viewModel.containersWidth,
         decoration: BoxDecoration(
-            color: Get.isDarkMode ? primaryGrey : Colors.white,
-            borderRadius: BorderRadius.circular(kContainerRadius),
+            color: Theme.of(context).colorScheme.primaryContainer,
+            borderRadius: kBorderRadius,
             boxShadow: [
               BoxShadow(
                   offset: const Offset(0, 10),
@@ -245,22 +248,8 @@ class DetailsTopContainer extends StatelessWidget {
               children: [
                 TitleAndText(
                   title: lang_key.price.tr,
-                  details: RichText(
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    text: TextSpan(
-                        text: viewModel.serviceDetails.value.price.toString(),
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            fontWeight: FontWeight.w600
-                        ),
-                        children: [
-                          TextSpan(
-                              text: " ${lang_key.sar.tr}",
-                              style: Theme.of(context).textTheme.labelSmall
-                          )
-                        ]
-                    ),
-                  ),),
+                  details: PriceText(price: viewModel.serviceDetails.value.price!)
+                ),
                 Container(
                   height: 50,
                   width: 1.5,
@@ -307,7 +296,9 @@ class DetailsTopContainer extends StatelessWidget {
 
 /// Service details middle container for discount and measuring unit
 class DetailsMiddleContainer extends StatelessWidget {
-  const DetailsMiddleContainer({super.key});
+  DetailsMiddleContainer({super.key});
+
+  final ServiceDetailsViewModel viewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -370,7 +361,9 @@ class DetailsMiddleContainer extends StatelessWidget {
 
 /// Service details bottom container which includes tabBar widget
 class DetailsBottomContainer extends StatelessWidget {
-  const DetailsBottomContainer({super.key});
+  DetailsBottomContainer({super.key});
+
+  final ServiceDetailsViewModel viewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -426,7 +419,9 @@ class DetailsBottomContainer extends StatelessWidget {
 
 /// TabBarView widget for description and reviews
 class DescAndRevContainers extends StatelessWidget {
-  const DescAndRevContainers({super.key});
+  DescAndRevContainers({super.key});
+
+  final ServiceDetailsViewModel viewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {

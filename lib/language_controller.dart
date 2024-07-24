@@ -45,18 +45,18 @@ class LanguageController extends GetxController {
   }
 
   setLanguage({required String key}) async {
+
     final String languageCode = optionsLocales[key]['languageCode'];
     final String countryCode = optionsLocales[key]['countryCode'];
 
     Get.updateLocale(Locale(languageCode, countryCode));
 
     locale.value = Get.locale.toString();
-    if (storage.read('language_key') == null) languageKey(key);
+    languageKey(key);
     storage.write('language_key', key);
     language(optionsLocales[key]['description']);
     countryKey(optionsLocales[key]['countryCode']);
 
     update();
-
   }
 }

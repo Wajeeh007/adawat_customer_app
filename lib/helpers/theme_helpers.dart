@@ -23,8 +23,11 @@ class ThemeHelpers {
       colorScheme: ColorScheme.fromSeed(
           seedColor: backgroundWhite,
           primaryContainer: backgroundWhite,
+          onPrimaryFixedVariant: primaryWhite,
           primary: primaryYellow, /// Primary is used as the variant of yellow used in this theme
-          secondary: lightThemeBorderGrey /// Secondary is the second most used color. This is used as border color, description text color and shadow color
+          secondary: lightThemeBorderGrey, /// Secondary is the second most used color. This is used as border color, description text color and shadow color
+          tertiaryContainer: lightModeShimmerBaseGrey, /// Tertiary Container is used as the base color for shimmer effect
+          tertiaryFixedDim: lightModeShimmerHighGrey /// Tertiary Fixed Dim is used as the high color for shimmer effect
       ),
       iconButtonTheme: IconButtonThemeData(style: IconButton.styleFrom(
           foregroundColor: primaryBlack, iconSize: 20)),
@@ -164,8 +167,11 @@ class ThemeHelpers {
       colorScheme: ColorScheme.fromSeed(
           seedColor: darkThemeLightGrey,
         primaryContainer: primaryGrey,
+        onPrimaryFixedVariant: primaryGrey,
         primary: primaryDullYellow, /// Primary is used as the variant of yellow used in this theme
-        secondary: darkThemeLightGrey /// Secondary is the second most used color. This is used as border color, description text color and shadow color
+        secondary: darkThemeLightGrey, /// Secondary is the second most used color. This is used as border color, description text color and shadow color
+          tertiaryContainer: lightModeShimmerBaseGrey, /// Tertiary Container is used as the base color for shimmer effect
+          tertiaryFixedDim: lightModeShimmerHighGrey /// Tertiary Fixed Dim is used as the high color for shimmer effect
       ),
       iconTheme: const IconThemeData(color: darkThemeLightGrey, size: 20,),
       appBarTheme: const AppBarTheme(

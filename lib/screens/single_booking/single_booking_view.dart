@@ -1,4 +1,5 @@
 import 'package:adawat_customer_app/custom_widgets/custom_appbar.dart';
+import 'package:adawat_customer_app/custom_widgets/custom_network_image.dart';
 import 'package:adawat_customer_app/custom_widgets/location_container.dart';
 import 'package:adawat_customer_app/custom_widgets/status_based_widget.dart';
 import 'package:adawat_customer_app/custom_widgets/status_container.dart';
@@ -8,6 +9,8 @@ import 'package:adawat_customer_app/screens/single_booking/single_booking_viewmo
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:adawat_customer_app/helpers/languages/translations_key.dart' as lang_key;
+
+import '../../custom_widgets/price_text.dart';
 
 final SingleBookingViewModel viewModel = Get.put<SingleBookingViewModel>(SingleBookingViewModel());
 
@@ -24,18 +27,24 @@ class SingleBookingView extends StatelessWidget {
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             child: ConstrainedBox(
-              constraints: BoxConstraints(minWidth: constraints.maxWidth, minHeight: constraints.maxHeight -20),
+              constraints: BoxConstraints(
+                  minWidth: constraints.maxWidth,
+                  minHeight: constraints.maxHeight - constraintSubtractValue
+              ),
               child: IntrinsicHeight(
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TitleAndText(title: lang_key.services.tr),
-                        TitleAndText(title: lang_key.quantity.tr)
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TitleAndText(title: lang_key.services.tr),
+                          TitleAndText(title: lang_key.quantity.tr)
+                        ],
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10, top: 5),
@@ -48,12 +57,15 @@ class SingleBookingView extends StatelessWidget {
                     const LocationAndTime(),
                     const CostDetails(),
                     Expanded(
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: StatusBasedWidget(type: ContainerType.pending,
-                          starsOffColor: Get.isDarkMode
-                              ? primaryGrey
-                              : darkThemeLightGrey,),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: StatusBasedWidget(type: ContainerType.pending,
+                            starsOffColor: Get.isDarkMode
+                                ? primaryGrey
+                                : darkThemeLightGrey,),
+                        ),
                       ),
                     )
                   ],
@@ -76,7 +88,7 @@ class LocationAndTime extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
           child: Column(
             children: [
               Row(
@@ -110,12 +122,12 @@ class CostDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text('Total Cost',style: Theme.of(context).textTheme.labelLarge,),
-          Text('150 ${lang_key.sar.tr}', style: Theme.of(context).textTheme.labelLarge,)
+          const PriceText(price: 150)
         ],
       ),
     );
@@ -129,54 +141,56 @@ class ServiceContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 90,
-      margin: const EdgeInsets.symmetric(vertical: 6),
-      padding: const EdgeInsets.symmetric(vertical: 6),
+      height: 100,
+      padding: const EdgeInsets.only(right: 15),
+      margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 15),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primaryContainer,
+        borderRadius: kBorderRadius,
+        boxShadow: Get.isDarkMode ? null : kShadow
+      ),
       child: Row(
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(kContainerRadius),
-                child: Image.asset(
-                    'assets/vectors/example_image.jpg',
-                  height: 80,
-                  width: 100,
-                  fit: BoxFit.fill,
-                ),
-              ),
+              const CustomNetworkImage(height: double.infinity, width: 100, placeholderImagePath: 'assets/vectors/example_image.jpg',),
               const SizedBox(width: 15,),
               SizedBox(
                 width: 150,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'AC Installation',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontSize: 16
-                      )
-                    ),
-                    Text(
-                      'AC Services',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.labelMedium,
-                    ),
-                    const Expanded(
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: StatusContainer(
-                            color: pendingStatusBgColor,
-                            text: 'Pending',
-                            textColor: errorRed
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'AC Installation',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          fontSize: 16
+                        )
+                      ),
+                      Text(
+                        'AC Services',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.secondary
                         ),
                       ),
-                    )
-                  ],
+                      const Expanded(
+                        child: Align(
+                          alignment: Alignment.bottomLeft,
+                          child: StatusContainer(
+                              color: pendingStatusBgColor,
+                              text: 'Pending',
+                              textColor: errorRed
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ],

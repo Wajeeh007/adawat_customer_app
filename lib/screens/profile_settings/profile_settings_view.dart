@@ -9,29 +9,32 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:adawat_customer_app/helpers/languages/translations_key.dart' as lang_key;
 
-final ProfileSettingsViewModel viewModel = Get.put<ProfileSettingsViewModel>(ProfileSettingsViewModel());
+class PersonalDetailsView extends StatelessWidget {
+  PersonalDetailsView({super.key});
 
-class ProfileSettingsView extends StatelessWidget {
-  const ProfileSettingsView({super.key});
+  final PersonalDetailsViewModel viewModel = Get.put<PersonalDetailsViewModel>(PersonalDetailsViewModel());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        titleText: lang_key.profileSettings.tr,
+        titleText: lang_key.personalDetails.tr,
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
             child: ConstrainedBox(
-              constraints: BoxConstraints(minWidth: constraints.maxWidth, minHeight: constraints.maxHeight - 20),
+              constraints: BoxConstraints(
+                  minWidth: constraints.maxWidth,
+                  minHeight: constraints.maxHeight - constraintSubtractValue
+              ),
               child: IntrinsicHeight(
                 child: Center(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const EditImage(),
+                        EditImage(),
                         Form(
                           key: viewModel.formKey,
                           child: Column(
@@ -52,7 +55,7 @@ class ProfileSettingsView extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const BottomButtons()
+                        BottomButtons()
                       ],
                     ),
                   ),
@@ -67,7 +70,9 @@ class ProfileSettingsView extends StatelessWidget {
 
 /// Image and edit icon widgets
 class EditImage extends StatelessWidget {
-  const EditImage({super.key});
+  EditImage({super.key});
+
+  final PersonalDetailsViewModel viewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +101,9 @@ class EditImage extends StatelessWidget {
 
 /// Buttons at the bottom of screen
 class BottomButtons extends StatelessWidget {
-  const BottomButtons({super.key});
+  BottomButtons({super.key});
+
+  final PersonalDetailsViewModel viewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {

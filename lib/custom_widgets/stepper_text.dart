@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class StepperText extends StatelessWidget {
-  const StepperText({super.key, required this.index, required this.texts});
+  const StepperText({
+    super.key,
+    required this.index,
+    required this.texts
+  }) :  assert(index <= texts.length - 1, 'Index cannot be greater than total number of texts');
 
   /// List should contain more than one string
+  /// Keep the strings as small as possible
   final List<String> texts;
 
   /// Index range starts from 0 till texts.length - 1

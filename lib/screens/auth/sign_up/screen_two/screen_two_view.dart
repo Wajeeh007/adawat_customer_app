@@ -1,8 +1,9 @@
 import 'package:adawat_customer_app/custom_widgets/custom_appbar.dart';
 import 'package:adawat_customer_app/custom_widgets/custom_button.dart';
 import 'package:adawat_customer_app/custom_widgets/custom_textfield.dart';
+import 'package:adawat_customer_app/custom_widgets/location_container.dart';
 import 'package:adawat_customer_app/helpers/common_functions.dart';
-import 'package:adawat_customer_app/helpers/constants.dart';
+import 'package:adawat_customer_app/helpers/routes.dart';
 import 'package:adawat_customer_app/screens/auth/sign_up/screen_two/screen_two_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,7 +19,7 @@ class ScreenTwoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(backBtn: true,),
+      appBar: CustomAppBar(titleText: lang_key.signUp.tr,),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
@@ -34,19 +35,14 @@ class ScreenTwoView extends StatelessWidget {
               child: CircularProgressIndicator(
                 strokeWidth: 4.5,
               ),
-            ) : Container(
-                margin: const EdgeInsets.symmetric(vertical: 15),
-                width: Get.width,
-                height: 130,
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(kContainerRadius),
-                  border: Border.all(
-                    color: Get.isDarkMode ? darkThemeLightGrey : primaryBlack,
-                  )
-                ),
-              child: const Placeholder(),
-              ),
+            ) : const LocationContainer()
+            ),
+            CustomTextField(
+              title: lang_key.label.tr,
+              asterisk: true,
+              hintText: lang_key.homeWorkOffice.tr,
+              controller: viewModel.labelController,
+              validator: (value) => CommonFunctions.validateDefaultField(value),
             ),
             CustomTextField(
               title: lang_key.houseOrApartment.tr,
@@ -82,7 +78,7 @@ class ScreenTwoView extends StatelessWidget {
             CustomTextField(
               title: lang_key.area.tr,
               asterisk: true,
-              hintText: '',
+              hintText: 'Al Olaya',
               controller: viewModel.areaController,
             ),
             CustomTextField(
@@ -99,7 +95,6 @@ class ScreenTwoView extends StatelessWidget {
                 Expanded(
                   child: CustomTextField(
                     title: lang_key.buildingName.tr,
-                    hintText: '',
                     controller: viewModel.buildingNameController,
                   ),
                 ),
@@ -107,7 +102,6 @@ class ScreenTwoView extends StatelessWidget {
                 Expanded(
                   child: CustomTextField(
                     title: lang_key.nearbyLandmark.tr,
-                    hintText: '',
                     controller: viewModel.nearbyLandmarkController,
                   ),
                 ),
@@ -118,7 +112,10 @@ class ScreenTwoView extends StatelessWidget {
               maxLines: 5,
               controller: viewModel.noteController,
             ),
-            CustomButton(onTap: () {}, text: lang_key.cont.tr)
+            CustomButton(
+                onTap: () => Get.toNamed(AppRoutes.signUpScreenThree),
+                text: lang_key.cont.tr
+            )
           ],
         ),
       ),

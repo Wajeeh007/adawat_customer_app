@@ -1,6 +1,7 @@
 import 'package:adawat_customer_app/custom_widgets/custom_appbar.dart';
 import 'package:adawat_customer_app/custom_widgets/custom_button.dart';
 import 'package:adawat_customer_app/helpers/constants.dart';
+import 'package:adawat_customer_app/helpers/routes.dart';
 import 'package:adawat_customer_app/screens/auth/otp_verification/otp_verification_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,8 +16,9 @@ class OtpVerificationView extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: const CustomAppBar(
-        backBtn: true,
+      appBar: CustomAppBar(
+        titleText: lang_key.verification.tr,
+        backBtnOnPressed: () => Get.off(AppRoutes.initRoute),
       ),
       body: Center(
         child: Padding(
@@ -46,7 +48,10 @@ class OtpVerificationView extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    CustomButton(onTap: () {}, text: lang_key.verify.tr,),
+                    CustomButton(
+                      onTap: () => Get.offAllNamed(AppRoutes.bottomBar),
+                      text: lang_key.verify.tr,
+                    ),
                   ],
                 ),
               )

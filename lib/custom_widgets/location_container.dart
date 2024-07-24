@@ -1,11 +1,11 @@
+import 'package:adawat_customer_app/custom_widgets/custom_network_image.dart';
 import 'package:adawat_customer_app/custom_widgets/title_and_text.dart';
-import 'package:adawat_customer_app/helpers/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:adawat_customer_app/helpers/languages/translations_key.dart' as lang_key;
 import 'package:get/get.dart';
 
 class LocationContainer extends StatelessWidget {
-  const LocationContainer({super.key, required this.isAddressReq});
+  const LocationContainer({super.key, this.isAddressReq = false});
 
   final bool isAddressReq;
 
@@ -13,18 +13,14 @@ class LocationContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        isAddressReq ? TitleAndText(
+        if(isAddressReq) TitleAndText(
           title: lang_key.address.tr,
           text: 'House No 220, Street No 18, Shaheen Housing Scheme, Warsak Road, Peshawar',
-        ) : const SizedBox(),
-        Container(
-          margin: const EdgeInsets.only(top: 5),
-          width: double.infinity,
-          height: 150,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(kContainerRadius)
-          ),
-          child: const Placeholder(),
+        ),
+        const CustomNetworkImage(
+            height: 150,
+            width: double.infinity,
+          placeholderImagePath: 'assets/vectors/location_example_image.png',
         )
       ],
     );

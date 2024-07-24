@@ -1,3 +1,5 @@
+import 'package:adawat_customer_app/custom_widgets/custom_network_image.dart';
+import 'package:adawat_customer_app/helpers/routes.dart';
 import 'package:adawat_customer_app/models/service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,6 +8,9 @@ import 'package:shimmer/shimmer.dart';
 import '../helpers/constants.dart';
 import 'custom_button.dart';
 
+//TODO: Use this widget at multiple places. Separate widgets have been created instead of using this
+
+/// Service details item container
 class ServiceItem extends StatelessWidget {
   const ServiceItem({super.key, required this.service});
 
@@ -22,10 +27,13 @@ class ServiceItem extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const SizedBox(
-            height: 100,
-              width: 90,
-              child: Placeholder(),
+          const Expanded(
+            flex: 2,
+            child: CustomNetworkImage(
+                height: 105,
+                width: double.infinity,
+                placeholderImagePath: 'assets/vectors/service_example_image.png',
+            ),
           ),
           Expanded(
               flex: 5,
@@ -74,7 +82,7 @@ class ServiceItem extends StatelessWidget {
                           ),
                         ),
                         CustomButton(
-                          onTap: () {},
+                          onTap: () => Get.toNamed(AppRoutes.serviceDetails, arguments: {'service': service}),
                           text: lang_key.bookNow.tr,
                           width: 80,
                           textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
@@ -98,6 +106,7 @@ class ServiceItem extends StatelessWidget {
   }
 }
 
+/// Shimmer effect for service item
 class ShimmerServiceItem extends StatelessWidget {
   const ShimmerServiceItem({super.key});
 
@@ -106,20 +115,17 @@ class ShimmerServiceItem extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       height: 105,
-      decoration: BoxDecoration(
-        color: Get.isDarkMode ? Colors.transparent : Colors.white,
-        borderRadius: BorderRadius.circular(kContainerRadius),
-      ),
+      color: Colors.transparent,
       child: Row(
         children: [
           Expanded(
               flex: 2,
               child: Shimmer.fromColors(
-                baseColor: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
-                highlightColor: Get.isDarkMode ? darkModeShimmerHighGrey : lightModeShimmerHighGrey,
+                baseColor: Theme.of(context).colorScheme.tertiaryContainer,
+                highlightColor: Theme.of(context).colorScheme.tertiaryFixedDim,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
+                    color: Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.4),
                     borderRadius: BorderRadius.circular(kContainerRadius)
                   ),
                 ),
@@ -137,26 +143,26 @@ class ShimmerServiceItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Shimmer.fromColors(
-                          baseColor: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
-                          highlightColor: Get.isDarkMode ? darkModeShimmerHighGrey : lightModeShimmerHighGrey,
+                          baseColor: Theme.of(context).colorScheme.tertiaryContainer,
+                          highlightColor: Theme.of(context).colorScheme.tertiaryFixedDim,
                           child: Container(
                             height: 15,
                             width: 150,
                             decoration: BoxDecoration(
-                              color: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
+                                color: Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.4),
                               borderRadius: BorderRadius.circular(kContainerRadius)
                             ),
                           ),
                         ),
                         const SizedBox(height: 5,),
                         Shimmer.fromColors(
-                          baseColor: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
-                          highlightColor: Get.isDarkMode ? darkModeShimmerHighGrey : lightModeShimmerHighGrey,
+                          baseColor: Theme.of(context).colorScheme.tertiaryContainer,
+                          highlightColor: Theme.of(context).colorScheme.tertiaryFixedDim,
                           child: Container(
                             height: 8,
                             width: 80,
                             decoration: BoxDecoration(
-                                color: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
+                                color: Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.4),
                                 borderRadius: BorderRadius.circular(kContainerRadius)
                             ),
                           ),
@@ -167,26 +173,26 @@ class ShimmerServiceItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Shimmer.fromColors(
-                          baseColor: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
-                          highlightColor: Get.isDarkMode ? darkModeShimmerHighGrey : lightModeShimmerHighGrey,
+                          baseColor: Theme.of(context).colorScheme.tertiaryContainer,
+                          highlightColor: Theme.of(context).colorScheme.tertiaryFixedDim,
                           child: Container(
                             height: 15,
                             width: 100,
                             decoration: BoxDecoration(
-                                color: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
+                                color: Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.4),
                                 borderRadius: BorderRadius.circular(kContainerRadius)
                             ),
                           ),
                         ),
                         const SizedBox(height: 5,),
                         Shimmer.fromColors(
-                          baseColor: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
-                          highlightColor: Get.isDarkMode ? darkModeShimmerHighGrey : lightModeShimmerHighGrey,
+                          baseColor: Theme.of(context).colorScheme.tertiaryContainer,
+                          highlightColor: Theme.of(context).colorScheme.tertiaryFixedDim,
                           child: Container(
                             height: 8,
                             width: 80,
                             decoration: BoxDecoration(
-                                color: Get.isDarkMode ? darkModeShimmerBaseGrey : lightModeShimmerBaseGrey,
+                                color: Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.4),
                                 borderRadius: BorderRadius.circular(kContainerRadius)
                             ),
                           ),

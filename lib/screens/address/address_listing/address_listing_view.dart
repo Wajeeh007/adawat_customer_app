@@ -1,69 +1,80 @@
 import 'package:adawat_customer_app/custom_widgets/custom_appbar.dart';
 import 'package:adawat_customer_app/custom_widgets/custom_button.dart';
 import 'package:adawat_customer_app/custom_widgets/location_container.dart';
+import 'package:adawat_customer_app/helpers/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
 import 'package:adawat_customer_app/helpers/languages/translations_key.dart' as lang_key;
+import 'package:shimmer/shimmer.dart';
 import '../../../custom_widgets/bottom_sheet_item.dart';
 import '../../../custom_widgets/custom_textfield.dart';
+import '../../../custom_widgets/guider.dart';
+import '../../../custom_widgets/guider_arrow_and_text.dart';
 import '../../../helpers/common_functions.dart';
 import '../../../helpers/constants.dart';
 import '../../../models/address.dart';
 import 'address_listing_viewmodel.dart';
 
-final AddressListingViewModel viewModel = Get.put<AddressListingViewModel>(AddressListingViewModel());
-
 class AddressListingView extends StatelessWidget {
-  const AddressListingView({super.key});
+  AddressListingView({super.key});
+
+  final AddressListingViewModel viewModel = Get.put<AddressListingViewModel>(AddressListingViewModel());
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        titleText: lang_key.address.tr,
-        action: [
-          IconButton(
-            onPressed: () {
-              if(viewModel.allAddressList.length > 4) {
-                CommonFunctions.showErrorToast(context: context, desc: lang_key.addressLimitReached.tr);
-              }
-            },
-            icon: const Icon(
-              Icons.add_circle_outline_rounded,
-              size: 25,
+    return Stack(
+      children: [
+        Scaffold(
+          appBar: CustomAppBar(
+            titleText: lang_key.address.tr,
+            action: [
+              IconButton(
+                onPressed: () {
+                  if(viewModel.allAddressList.length > 4) {
+                    CommonFunctions.showErrorToast(context: context, desc: lang_key.addressLimitReached.tr);
+                  } else {
+                    Get.toNamed(AppRoutes.editOrAddAddress, arguments: {'isAdd', true});
+                  }
+                },
+                icon: const Icon(
+                  Icons.add_circle_outline_rounded,
+                  size: 25,
+                ),
+              )
+            ],
+          ),
+          body: viewModel.allAddressList.isEmpty ? const NoAddressFound() : SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+            child: Column(
+              children: [
+                SearchField(),
+                const SizedBox(
+                  height: 20,
+                ),
+                Obx(() => Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(viewModel.allAddressList.length, (index) {
+                      return AddressItem(address: viewModel.allAddressList[index], index: index,);
+                    }),
+                  ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
-      body: viewModel.allAddressList.isEmpty ? const NoAddressFound() : SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        child: Column(
-          children: [
-            const SearchField(),
-            const SizedBox(
-              height: 20,
-            ),
-            Obx(() => Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(viewModel.allAddressList.length, (index) {
-                  return AddressItem(address: viewModel.allAddressList[index], index: index,);
-                }),
-              ),
-            )
-          ],
+          ),
         ),
-      ),
+        ItemGuider(),
+      ],
     );
   }
 
   /// Bottom sheet for choosing filter type
-  static showFilterBottomSheet(BuildContext context) {
+  showFilterBottomSheet(BuildContext context) {
     Get.bottomSheet(
         elevation: 8,
         Container(
-          height: Get.height * 0.3,
+          // height: Get.height * 0.3,
           padding: const EdgeInsets.all(15),
           width: double.infinity,
           decoration: BoxDecoration(
@@ -71,6 +82,7 @@ class AddressListingView extends StatelessWidget {
               color: Theme.of(context).colorScheme.primaryContainer
           ),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -97,7 +109,7 @@ class AddressListingView extends StatelessWidget {
               ),
               Obx(() => Column(
                 children: List.generate(viewModel.bottomSheetItems.length, (int index) {
-                  return BottomSheetItem(itemsList: viewModel.bottomSheetItems, index: index);
+                  return BottomSheetItem(itemsList: viewModel.bottomSheetItems, index: index, chosenFilterValue: viewModel.chosenFilter,);
                 }),
               ),
               ),
@@ -111,7 +123,9 @@ class AddressListingView extends StatelessWidget {
 
 /// Search and filter field at the top
 class SearchField extends StatelessWidget {
-  const SearchField({super.key});
+  SearchField({super.key});
+
+  final AddressListingViewModel viewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +135,7 @@ class SearchField extends StatelessWidget {
           flex: 7,
           child: CustomTextField(
             keyboardType: viewModel.chosenFilter.value == lang_key.phone.tr ? TextInputType.number : TextInputType.text,
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             controller: viewModel.searchController,
             hintText: "${lang_key.searchAddress.tr} ${lang_key.by.tr} ${viewModel.chosenFilter.value}",
             prefixIcon: const Icon(
@@ -133,6 +147,7 @@ class SearchField extends StatelessWidget {
             },
           ),
         ),
+        const SizedBox(width: 10,),
         Expanded(
           child: CustomTextField(
             prefixIcon: const Icon(
@@ -140,7 +155,7 @@ class SearchField extends StatelessWidget {
               size: 18,
             ),
             readOnly: true,
-            onTap: () => AddressListingView.showFilterBottomSheet(context),
+            onTap: () => AddressListingView().showFilterBottomSheet(context),
           ),
         )
       ],
@@ -150,15 +165,17 @@ class SearchField extends StatelessWidget {
 
 /// Address item for showing details of an address
 class AddressItem extends StatelessWidget {
-  const AddressItem({super.key, required this.address, required this.index});
+  AddressItem({super.key, required this.address, required this.index});
 
   final Address address;
   final int index;
 
+  final AddressListingViewModel viewModel = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: SwipeActionCell(
         fullSwipeFactor: 0.65,
           leadingActions: [
@@ -174,7 +191,7 @@ class AddressItem extends StatelessWidget {
               ),
               color: Get.isDarkMode ? darkThemeLightGrey : primaryBlack,
               backgroundRadius: kContainerRadius,
-              onTap: (CompletionHandler handler) async {},
+              onTap: (CompletionHandler handler) async => Get.toNamed(AppRoutes.editOrAddAddress),
             )
           ],
           trailingActions: [
@@ -194,10 +211,10 @@ class AddressItem extends StatelessWidget {
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-            margin: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer,
-              borderRadius: kBorderRadius
+              color: Theme.of(context).colorScheme.onPrimaryFixedVariant,
+              borderRadius: kBorderRadius,
+              // boxShadow: kShadow
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -287,6 +304,32 @@ class NoAddressFound extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// Guide for user to perform actions
+class ItemGuider extends StatelessWidget {
+  ItemGuider({super.key});
+
+  final AddressListingViewModel viewModel = Get.find();
+
+  @override
+  Widget build(BuildContext context) {
+    return Guider(
+      guiderBool: viewModel.showGuider,
+      children: [
+        GuiderArrowAndText(
+          text: lang_key.swipeToDelete.tr,
+          arrowIcon: Icons.arrow_back_ios_new_rounded,
+        ),
+        const SizedBox(height: 80,),
+        GuiderArrowAndText(
+          text: lang_key.swipeToEdit.tr,
+          arrowIcon: Icons.arrow_forward_ios_rounded,
+          shimmerDirection: ShimmerDirection.ltr,
+        ),
+      ],
     );
   }
 }

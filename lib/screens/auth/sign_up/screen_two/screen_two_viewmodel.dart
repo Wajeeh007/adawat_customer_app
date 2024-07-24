@@ -1,5 +1,6 @@
 // import 'package:geolocator/geolocator.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:permission_handler/permission_handler.dart';
@@ -9,6 +10,7 @@ class ScreenTwoViewModel extends GetxController {
   // late GoogleMapController googleMapController;
   // late Position currentPosition;
   RxBool fetchingLocation = true.obs;
+  TextEditingController labelController = TextEditingController();
   TextEditingController houseNumController = TextEditingController();
   TextEditingController streetNumController = TextEditingController();
   TextEditingController laneController = TextEditingController();
@@ -17,6 +19,7 @@ class ScreenTwoViewModel extends GetxController {
   TextEditingController buildingNameController = TextEditingController();
   TextEditingController nearbyLandmarkController = TextEditingController();
   TextEditingController noteController = TextEditingController();
+  TextEditingController numberController = TextEditingController();
 
   @override
   void onReady() async {
@@ -29,7 +32,21 @@ class ScreenTwoViewModel extends GetxController {
   void onClose() {
     // currentPosition = await _determinePosition();
     stopTimer();
+    disposeVariables();
     super.onClose();
+  }
+
+  disposeVariables() {
+    labelController.dispose();
+    houseNumController.dispose();
+    streetNumController.dispose();
+    laneController.dispose();
+    areaController.dispose();
+    cityController.dispose();
+    buildingNameController.dispose();
+    nearbyLandmarkController.dispose();
+    numberController.dispose();
+    noteController.dispose();
   }
 
   stopTimer() {
